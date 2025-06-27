@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CardioVis – Real-Time AI Decision Support for Cardiac Surgery</title>
+
+  <!-- Basic SEO -->
+  <meta name="description"
+        content="CardioVis provides real-time computer-vision and digital-twin analytics to guide cardiac-valve repair and replacement.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Social sharing -->
+  <meta property="og:title" content="CardioVis – Real-Time Cardiac Surgery AI">
+  <meta property="og:description"
+        content="Interactive decision-support platform for surgeons: instant valve segmentation, hemodynamic forecasts, HIPAA-secure cloud.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/og-card.png"><!-- replace with your graphic -->
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container flex">
+    <h1 class="logo">CardioVis</h1>
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h2>Real-Time Decision Support for Valve Repair &amp; Replacement</h2>
+      <p class="subtitle">
+        AI-powered segmentation · digital-twin simulation · outcomes forecast—in the OR, in minutes.
+      </p>
+      <a class="cta" href="#contact">Request a Demo</a>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section id="solutions" class="section">
+    <div class="container grid-3">
+      <article>
+        <h3>ValveVision&nbsp;Portal</h3>
+        <p>HIPAA-secure cloud workspace to upload CT, TEE, or angio video and receive annotated reports.</p>
+      </article>
+      <article>
+        <h3>TEE-to-Twin&nbsp;Pipeline</h3>
+        <p>Automatic 3-D segmentation &amp; finite-element solver delivers a patient-specific digital twin in &lt; 10 min.</p>
+      </article>
+      <article>
+        <h3>Predictive&nbsp;Analytics</h3>
+        <p>Bayesian models forecast post-repair regurgitation and leaflet stress, guiding surgical strategy.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Interactive demo -->
+  <section id="demo" class="section-alt">
+    <div class="container">
+      <h2>Live Computer-Vision Demo</h2>
+      <p>Try our valve-segmentation model on a sample frame or your own image.</p>
+
+      <!-- Gradio embed: replace the src URL with your actual Space -->
+      <script type="module"
+              src="https://gradio.s3-us-west-2.amazonaws.com/4.32.2/gradio.js"></script>
+      <gradio-app src="https://huggingface.co/spaces/your-org/cardiovis-demo"></gradio-app>
+      <!-- ↑ replace 'your-org/cardiovis-demo' after you create the Space -->
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section id="research" class="section">
+    <div class="container">
+      <h2>Peer-Reviewed Evidence</h2>
+      <ul class="bullet-list">
+        <li><strong>Dice 0.91</strong> on the Multi-Center ValveSeg™ dataset (n = 3 042 frames).</li>
+        <li><strong>&lt; 10 min</strong> CT-to-twin runtime on a single RTX A6000 GPU.</li>
+        <li>Supported by NIH R21 HL-XXXXXX and NSF Digital-Twins grant DMS-XXXXXX.</li>
+      </ul>
+      <p><a href="papers.html">View publications&nbsp;›</a></p>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="section-alt">
+    <div class="container grid-2">
+      <article class="card">
+        <img src="images/founder.jpg" alt="Dr. Firstname Lastname" loading="lazy">
+        <h3>Dr. Firstname Lastname</h3>
+        <p>Founder &amp; Cardiac Surgeon<br>20 yrs minimally invasive valve repair.</p>
+      </article>
+      <article class="card">
+        <img src="images/cto.jpg" alt="CTO portrait" loading="lazy">
+        <h3>Firstname Lastname&nbsp;PhD</h3>
+        <p>CTO &amp; Computational Scientist<br>Ex-NVIDIA Medical Imaging.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Get in Touch</h2>
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
+        <label>
+          Name
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <button type="submit">Send Message</button>
+      </form>
+      <p class="small">
+        We’ll reply within 2 business days. No spam—see our <a href="privacy.html">privacy policy</a>.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="year"></span> CardioVis&nbsp;Inc.&nbsp;· All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  /* auto-update copyright year */
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
