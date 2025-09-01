@@ -3,13 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CardioVis - Revolutionizing Cardiac Surgery with AI & Digital Twins</title>
-    
-    <!-- External Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.js"></script>
-    
+    <title>CardioVis - Pioneering AI-Driven Cardiac Surgery Innovation</title>
     <style>
         * {
             margin: 0;
@@ -18,52 +12,40 @@
         }
 
         :root {
-            --primary-red: #DC143C;
-            --deep-red: #8B0000;
-            --cardiac-blue: #1e3a5f;
-            --tech-cyan: #00CED1;
-            --medical-white: #FAFAFA;
-            --dark-bg: #0a0e1a;
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-medical: linear-gradient(135deg, #DC143C 0%, #FF6B6B 50%, #4ECDC4 100%);
-            --gradient-tech: linear-gradient(135deg, #00CED1 0%, #1e3a5f 50%, #DC143C 100%);
+            --primary-blue: #0056b3;
+            --secondary-blue: #17a2b8;
+            --accent-red: #dc3545;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #0056b3 0%, #17a2b8 100%);
+            --text-dark: #2c3e50;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--dark-bg);
-            color: var(--medical-white);
-            overflow-x: hidden;
             line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
 
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--primary-red), var(--tech-cyan));
-            border-radius: 5px;
-        }
-
-        /* Advanced Navigation */
-        .nav-container {
+        /* Navigation */
+        nav {
             position: fixed;
             top: 0;
             width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
             z-index: 1000;
-            background: rgba(10, 14, 26, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
 
-        .nav-content {
+        .nav-container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 1rem 2rem;
@@ -75,75 +57,199 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            background: var(--gradient-medical);
+            background: var(--gradient-2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            cursor: pointer;
         }
 
         .logo::before {
             content: "❤️";
             font-size: 1.5rem;
-            filter: drop-shadow(0 0 10px rgba(220, 20, 60, 0.5));
+            -webkit-text-fill-color: initial;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient-2);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,96C1248,96,1344,128,1392,144L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
+            background-size: cover;
+            animation: wave 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-50%) translateY(-50px); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .heart-3d {
+            width: 100%;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heart-animation {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .heart-animation::before {
+            content: '❤️';
+            font-size: 150px;
+            position: absolute;
             animation: heartbeat 1.5s ease-in-out infinite;
         }
 
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-item {
-            position: relative;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-        }
-
-        .nav-item:hover {
-            background: rgba(220, 20, 60, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .nav-item::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--primary-red);
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-        }
-
-        .nav-item:hover::after,
-        .nav-item.active::after {
-            width: 80%;
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 5rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            display: none;
-            min-height: 100vh;
-        }
-
-        .content-section.active {
-            display: block;
-            animation: fadeInUp 0.6s ease;
         }
 
         @keyframes fadeInUp {
@@ -157,240 +263,187 @@
             }
         }
 
-        /* Homepage Hero Section */
-        .hero-section {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-top: 80px;
+        /* Products Section */
+        .products {
+            padding: 5rem 2rem;
+            background: var(--light-gray);
         }
 
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 800;
+        .section-header {
             text-align: center;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff 0%, #DC143C 25%, #00CED1 75%, #fff 100%);
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 5s ease infinite;
-            line-height: 1.2;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(30deg); }
-        }
-
-        .hero-subtitle {
-            font-size: 1.8rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-            margin-bottom: 3rem;
-            max-width: 900px;
-        }
-
-        /* Digital Twin Canvas Container */
-        .digital-twin-showcase {
-            width: 100%;
-            max-width: 1400px;
-            margin: 3rem auto;
-            background: linear-gradient(135deg, rgba(30, 58, 95, 0.2) 0%, rgba(10, 14, 26, 0.8) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 60px rgba(220, 20, 60, 0.2);
-        }
-
-        #advancedMitralCanvas {
-            width: 100%;
-            height: 700px;
-            border-radius: 15px;
-            background: radial-gradient(ellipse at center, rgba(30, 58, 95, 0.3) 0%, rgba(10, 14, 26, 0.9) 100%);
-            position: relative;
-        }
-
-        .canvas-overlay {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(10, 14, 26, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .overlay-title {
-            color: var(--tech-cyan);
+        .section-header p {
             font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            opacity: 0.8;
         }
 
-        .overlay-metrics {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .metric-row {
-            display: flex;
-            justify-content: space-between;
+        .products-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
         }
 
-        .metric-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .metric-value {
-            color: white;
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .product-card p {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            color: var(--secondary-blue);
             font-weight: bold;
         }
 
-        /* Advanced Demo Controls */
-        .demo-control-panel {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .control-group {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-
-        .control-group-title {
-            color: var(--tech-cyan);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
+        .learn-more {
+            color: var(--secondary-blue);
+            text-decoration: none;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
         }
 
-        .control-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+        .learn-more:hover {
+            gap: 1rem;
         }
 
-        .control-button {
-            padding: 0.8rem 1.2rem;
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.2) 0%, rgba(0, 206, 209, 0.2) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            position: relative;
-            overflow: hidden;
+        /* Technology Section */
+        .technology {
+            padding: 5rem 2rem;
+            background: white;
         }
 
-        .control-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            transition: width 0.5s ease, height 0.5s ease;
-        }
-
-        .control-button:hover::before {
-            width: 200%;
-            height: 200%;
-        }
-
-        .control-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(220, 20, 60, 0.3);
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.4) 0%, rgba(0, 206, 209, 0.4) 100%);
-        }
-
-        .control-button.active {
-            background: linear-gradient(135deg, var(--primary-red) 0%, var(--tech-cyan) 100%);
-            box-shadow: 0 0 20px rgba(220, 20, 60, 0.5);
-        }
-
-        /* Parameter Sliders */
-        .parameter-slider {
-            margin-bottom: 1rem;
-        }
-
-        .slider-label {
-            display: flex;
-            justify-content: space-between;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .slider {
-            width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: rgba(255, 255, 255, 0.1);
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--tech-cyan);
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
-        }
-
-        .slider::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--tech-cyan);
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
-        }
-
-        /* Real-time Metrics Dashboard */
-        .metrics-dashboard {
+        .tech-grid {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .tech-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+        }
+
+        .tech-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
             margin-top: 2rem;
         }
 
-        .metric-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
+        .tech-item {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 10px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: var(--gradient-2);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .tech-visual {
+            background: var(--gradient-2);
+            border-radius: 20px;
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
             position: relative;
             overflow: hidden;
         }
 
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(220, 20, 60, 0.1) 0%, transparent 70%);
+        .tech-animation {
+            width: 300px;
+            height: 300px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: relative;
             animation: rotate 20s linear infinite;
         }
 
@@ -399,2887 +452,1154 @@
             to { transform: rotate(360deg); }
         }
 
-        .metric-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-title {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-main-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--tech-cyan);
-            margin-bottom: 0.5rem;
-        }
-
-        .metric-chart-container {
-            height: 60px;
-            margin-top: 0.5rem;
-        }
-
-        /* Key Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(0, 206, 209, 0.05) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::after {
+        .tech-animation::before,
+        .tech-animation::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-medical);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
         }
 
-        .feature-card:hover::after {
-            transform: scaleX(1);
+        .tech-animation::before {
+            top: 20px;
+            left: 20px;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.2);
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1) 0%, rgba(0, 206, 209, 0.1) 100%);
+        .tech-animation::after {
+            bottom: 20px;
+            right: 20px;
+            animation: pulse 2s ease-in-out infinite 1s;
         }
 
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-medical);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 10px 20px rgba(220, 20, 60, 0.2);
-        }
-
-        .feature-title {
-            font-size: 1.4rem;
-            color: var(--tech-cyan);
-            margin-bottom: 1rem;
-        }
-
-        .feature-description {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .feature-stats {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .feature-stat {
-            flex: 1;
-        }
-
-        .feature-stat-value {
-            color: var(--primary-red);
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .feature-stat-label {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.85rem;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.3); opacity: 0.8; }
         }
 
         /* Clinical Impact Section */
-        .clinical-impact {
-            background: linear-gradient(135deg, rgba(30, 58, 95, 0.2) 0%, rgba(10, 14, 26, 0.4) 100%);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 4rem 0;
+        .impact {
+            padding: 5rem 2rem;
+            background: var(--light-gray);
         }
 
-        .impact-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: var(--gradient-medical);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .impact-grid {
+        .stats-grid {
+            max-width: 1200px;
+            margin: 3rem auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
-        .impact-item {
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
             text-align: center;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
+            box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
         }
 
-        .impact-item:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.05);
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .impact-number {
+        .stat-number {
             font-size: 3rem;
             font-weight: bold;
-            background: var(--gradient-tech);
+            background: var(--gradient-2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
         }
 
-        .impact-label {
-            color: rgba(255, 255, 255, 0.9);
+        .stat-label {
             font-size: 1.1rem;
+            color: var(--text-dark);
+            opacity: 0.8;
         }
 
-        /* Technology Deep Dive */
-        .tech-deep-dive {
-            margin: 4rem 0;
+        /* Research Section */
+        .research {
+            padding: 5rem 2rem;
+            background: white;
         }
 
-        .tech-section-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            background: var(--gradient-tech);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tech-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .tech-showcase-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .tech-showcase-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 206, 209, 0.2);
-        }
-
-        .tech-showcase-header {
-            background: var(--gradient-medical);
-            padding: 1.5rem;
-            position: relative;
-        }
-
-        .tech-showcase-title {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-
-        .tech-showcase-subtitle {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.95rem;
-        }
-
-        .tech-showcase-content {
-            padding: 2rem;
-        }
-
-        .tech-feature-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-feature-item {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: start;
-            gap: 1rem;
-        }
-
-        .tech-feature-item::before {
-            content: "✓";
-            color: var(--tech-cyan);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .tech-specs {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-
-        .spec-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .spec-label {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .spec-value {
-            color: var(--tech-cyan);
-            font-weight: 500;
-        }
-
-        /* Research Timeline Enhanced */
-        .research-timeline {
-            position: relative;
-            padding: 4rem 0;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--primary-red) 0%, var(--tech-cyan) 50%, var(--primary-red) 100%);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .timeline-content {
-            width: 45%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .timeline-content::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--dark-bg);
-            border: 2px solid var(--tech-cyan);
-            transform: rotate(45deg);
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content::before {
-            right: -11px;
-            top: 50%;
-            transform: translateY(-50%) rotate(45deg);
-        }
-
-        .timeline-item:nth-child(even) .timeline-content::before {
-            left: -11px;
-            top: 50%;
-            transform: translateY(-50%) rotate(45deg);
-        }
-
-        .timeline-content:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.2);
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1) 0%, rgba(0, 206, 209, 0.1) 100%);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            background: var(--gradient-medical);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(220, 20, 60, 0.5);
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: white;
-            font-weight: bold;
-        }
-
-        .timeline-date {
-            font-size: 1.8rem;
-            color: var(--primary-red);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-title {
-            font-size: 1.4rem;
-            color: var(--tech-cyan);
-            margin-bottom: 1rem;
-        }
-
-        .timeline-description {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .timeline-tag {
-            padding: 0.3rem 0.8rem;
-            background: rgba(0, 206, 209, 0.2);
-            border: 1px solid var(--tech-cyan);
-            border-radius: 20px;
-            color: var(--tech-cyan);
-            font-size: 0.85rem;
-        }
-
-        /* Team Section Enhanced */
-        .team-section {
-            padding: 4rem 0;
-        }
-
-        .team-grid {
+        .research-areas {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
-        .team-member {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .team-member::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(220, 20, 60, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .team-member:hover::before {
-            opacity: 1;
-        }
-
-        .team-member:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(220, 20, 60, 0.2);
-        }
-
-        .team-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: var(--gradient-medical);
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
+        .research-card {
+            background: var(--gradient-2);
             color: white;
-            box-shadow: 0 15px 30px rgba(220, 20, 60, 0.3);
-            position: relative;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .team-avatar::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid var(--tech-cyan);
-            animation: pulse 2s ease infinite;
+        .research-card:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0;
-            }
-        }
-
-        .team-name {
+        .research-card h4 {
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--tech-cyan);
-        }
-
-        .team-role {
-            color: var(--primary-red);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .team-bio {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .team-credentials {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .credential-tag {
-            padding: 0.3rem 0.6rem;
-            background: rgba(0, 206, 209, 0.2);
-            border: 1px solid var(--tech-cyan);
-            border-radius: 15px;
-            color: var(--tech-cyan);
-            font-size: 0.85rem;
-        }
-
-        .team-links {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .team-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .team-link:hover {
-            background: var(--gradient-medical);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(220, 20, 60, 0.3);
-        }
-
-        /* Publications Enhanced */
-        .publications-section {
-            padding: 4rem 0;
-        }
-
-        .publication-filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .filter-button {
-            padding: 0.8rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-button:hover,
-        .filter-button.active {
-            background: var(--gradient-medical);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(220, 20, 60, 0.3);
-        }
-
-        .publications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .publication-card {
-            background: linear-gradient(135deg, rgba(30, 58, 95, 0.3) 0%, rgba(10, 14, 26, 0.5) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .publication-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .publication-card:hover::before {
-            left: 100%;
-        }
-
-        .publication-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 206, 209, 0.3);
-            border-color: var(--tech-cyan);
-        }
-
-        .publication-type {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: var(--gradient-medical);
-            border-radius: 20px;
-            color: white;
-            font-size: 0.85rem;
             margin-bottom: 1rem;
         }
 
-        .publication-title {
-            font-size: 1.2rem;
-            color: var(--tech-cyan);
-            margin-bottom: 1rem;
-            line-height: 1.4;
+        .research-card p {
+            opacity: 0.95;
+            line-height: 1.7;
         }
 
-        .publication-authors {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .publication-journal {
-            color: var(--primary-red);
-            font-size: 0.9rem;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .publication-abstract {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .publication-metrics {
-            display: flex;
-            gap: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .publication-metric {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        /* Partners & Collaborators */
-        .partners-section {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(30, 58, 95, 0.1) 0%, rgba(10, 14, 26, 0.3) 100%);
-            border-radius: 20px;
-            margin: 4rem 0;
-        }
-
-        .partners-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: var(--gradient-tech);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Partners Section */
+        .partners {
+            padding: 5rem 2rem;
+            background: var(--light-gray);
         }
 
         .partners-grid {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .partner-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .partner-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(220, 20, 60, 0.2);
-            background: rgba(255, 255, 255, 0.05);
+            gap: 3rem;
+            align-items: center;
         }
 
         .partner-logo {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .partner-name {
-            color: var(--tech-cyan);
+        .partner-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .partner-logo h5 {
+            color: var(--primary-blue);
             font-size: 1.1rem;
+        }
+
+        /* Publications Section */
+        .publications {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .pub-list {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pub-item {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .pub-item:hover {
+            background: white;
+            box-shadow: var(--shadow-md);
+            transform: translateX(10px);
+        }
+
+        .pub-title {
+            font-weight: 600;
+            color: var(--primary-blue);
             margin-bottom: 0.5rem;
         }
 
-        .partner-type {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
+        .pub-authors {
+            color: var(--text-dark);
+            opacity: 0.8;
+            font-style: italic;
+            margin-bottom: 0.5rem;
         }
 
-        /* Contact Section Enhanced */
-        .contact-section {
-            padding: 4rem 0;
+        .pub-venue {
+            color: var(--secondary-blue);
+            font-weight: 500;
         }
 
-        .contact-container {
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1) 0%, rgba(0, 206, 209, 0.1) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-top: 3rem;
-        }
-
-        .contact-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .contact-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: var(--gradient-medical);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .contact-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: var(--gradient-2);
+            color: white;
         }
 
         .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
         }
 
         .contact-form {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
         }
 
-        .form-label {
-            color: var(--tech-cyan);
-            font-size: 0.95rem;
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
-        .form-input,
-        .form-textarea {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
             padding: 1rem;
-            color: white;
+            border: none;
+            border-radius: 10px;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
 
-        .form-input:focus,
-        .form-textarea:focus {
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
-            border-color: var(--tech-cyan);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 20px rgba(0, 206, 209, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
         }
 
-        .form-textarea {
-            min-height: 150px;
+        .form-group textarea {
             resize: vertical;
+            min-height: 150px;
         }
 
-        .form-submit {
-            padding: 1rem 2rem;
-            background: var(--gradient-medical);
+        .submit-btn {
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 3rem;
             border: none;
-            border-radius: 8px;
-            color: white;
+            border-radius: 50px;
             font-size: 1.1rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin: 0 auto;
+            display: block;
         }
 
-        .form-submit:hover {
+        .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(220, 20, 60, 0.3);
+            box-shadow: var(--shadow-lg);
         }
 
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .contact-item {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            gap: 1rem;
-            align-items: start;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--tech-cyan);
-        }
-
-        .contact-details {
-            flex: 1;
-        }
-
-        .contact-label {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-value {
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
             color: white;
-            font-size: 1.1rem;
-        }
-
-        /* Footer Enhanced */
-        .footer {
-            background: linear-gradient(180deg, rgba(10, 14, 26, 0.95) 0%, rgba(10, 14, 26, 1) 100%);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 4rem 2rem 2rem;
-            margin-top: 5rem;
+            padding: 3rem 2rem 2rem;
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
-            margin-bottom: 3rem;
         }
 
-        .footer-brand {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .footer-logo {
-            font-size: 2.5rem;
-            background: var(--gradient-medical);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .footer-section h4 {
             margin-bottom: 1rem;
         }
 
-        .footer-description {
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+        .footer-section ul {
+            list-style: none;
         }
 
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--gradient-medical);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(220, 20, 60, 0.3);
-        }
-
-        .footer-column {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .footer-column-title {
-            color: var(--tech-cyan);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-link {
-            color: rgba(255, 255, 255, 0.6);
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: color 0.3s ease;
+            display: block;
+            padding: 0.3rem 0;
         }
 
-        .footer-link:hover {
+        .footer-section a:hover {
             color: white;
-        }
-
-        .footer-divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 2rem 0;
         }
 
         .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .footer-copyright {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-        }
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
 
-        .footer-legal {
-            display: flex;
-            gap: 2rem;
-        }
-
-        /* Loading Animation */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loader.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .heart-loader {
-            width: 100px;
-            height: 100px;
-            position: relative;
-            animation: heartPulse 1.5s ease infinite;
-        }
-
-        @keyframes heartPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-        }
-
-        .heart-loader::before,
-        .heart-loader::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 80px;
-            background: var(--primary-red);
-            border-radius: 50px 50px 0 0;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-
-        .heart-loader::after {
-            left: 50px;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .contact-content {
+            .hero-content {
                 grid-template-columns: 1fr;
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
+            .hero-text h1 {
                 font-size: 2.5rem;
             }
 
-            .nav-menu {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .timeline-line {
-                left: 20px;
-            }
-
-            .timeline-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .timeline-content {
-                width: calc(100% - 40px);
-                margin-left: 40px;
-            }
-
-            .timeline-dot {
-                left: 20px;
-            }
-
-            .footer-grid {
+            .tech-grid {
                 grid-template-columns: 1fr;
             }
 
-            .demo-control-panel {
+            .form-row {
                 grid-template-columns: 1fr;
             }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: var(--text-dark);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--accent-red);
+        }
+
+        .modal h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section h4 {
+            color: var(--secondary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .modal-section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .modal-section ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .modal-section li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .modal-section li::before {
+            content: '→';
+            color: var(--secondary-blue);
+            font-weight: bold;
+            margin-top: 2px;
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="heart-loader"></div>
-    </div>
-
     <!-- Navigation -->
-    <nav class="nav-container">
-        <div class="nav-content">
-            <div class="logo" onclick="showSection('home')">CardioVis</div>
-            <ul class="nav-menu">
-                <li class="nav-item active" onclick="showSection('home')">Home</li>
-                <li class="nav-item" onclick="showSection('technology')">Technology</li>
-                <li class="nav-item" onclick="showSection('research')">Research</li>
-                <li class="nav-item" onclick="showSection('team')">Team</li>
-                <li class="nav-item" onclick="showSection('publications')">Publications</li>
-                <li class="nav-item" onclick="showSection('partners')">Partners</li>
-                <li class="nav-item" onclick="showSection('contact')">Contact</li>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">CardioVis</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#technology">Technology</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#impact">Clinical Impact</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#contact" class="cta-button">Get Started</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Home Section with Advanced Digital Twin Demo -->
-    <section id="home" class="content-section active">
-        <div class="hero-section">
-            <h1 class="hero-title">Revolutionizing Cardiac Surgery<br>Through AI & Digital Twins</h1>
-            <p class="hero-subtitle">
-                Transforming cardiac interventions with real-time digital twins, AI-powered surgical guidance, 
-                and precision medicine. Our technology reduces surgical complications by 40% and improves patient outcomes 
-                through predictive modeling and personalized treatment planning.
-            </p>
-
-            <!-- Advanced Digital Twin Showcase -->
-            <div class="digital-twin-showcase">
-                <div style="position: relative;">
-                    <canvas id="advancedMitralCanvas"></canvas>
-                    <div class="canvas-overlay">
-                        <div class="overlay-title">Live Hemodynamics</div>
-                        <div class="overlay-metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">Pressure:</span>
-                                <span class="metric-value" id="pressureValue">120/80 mmHg</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">Flow Rate:</span>
-                                <span class="metric-value" id="flowRateValue">5.2 L/min</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">Regurgitation:</span>
-                                <span class="metric-value" id="regurgValue">Trace</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Advanced Control Panel -->
-                <div class="demo-control-panel">
-                    <div class="control-group">
-                        <div class="control-group-title">Cardiac Simulation</div>
-                        <div class="control-buttons">
-                            <button class="control-button" onclick="startHeartbeat()">Start Heartbeat</button>
-                            <button class="control-button" onclick="toggleBloodFlow()">Toggle Blood Flow</button>
-                            <button class="control-button" onclick="simulateExercise()">Simulate Exercise</button>
-                            <button class="control-button" onclick="simulateRest()">Simulate Rest</button>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-group-title">Pathology Simulation</div>
-                        <div class="control-buttons">
-                            <button class="control-button" onclick="simulateMildMR()">Mild Regurgitation</button>
-                            <button class="control-button" onclick="simulateModerateMR()">Moderate Regurgitation</button>
-                            <button class="control-button" onclick="simulateSevereMR()">Severe Regurgitation</button>
-                            <button class="control-button" onclick="simulateProlapse()">Leaflet Prolapse</button>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-group-title">Surgical Interventions</div>
-                        <div class="control-buttons">
-                            <button class="control-button" onclick="simulateAnnuloplasty()">Annuloplasty Ring</button>
-                            <button class="control-button" onclick="simulateMitraClip()">MitraClip Placement</button>
-                            <button class="control-button" onclick="simulateChordRepair()">Chordal Repair</button>
-                            <button class="control-button" onclick="simulateValveReplacement()">Valve Replacement</button>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <div class="control-group-title">Visualization Modes</div>
-                        <div class="control-buttons">
-                            <button class="control-button" onclick="showAnatomyMode()">Anatomy View</button>
-                            <button class="control-button" onclick="showFlowMode()">Flow Dynamics</button>
-                            <button class="control-button" onclick="showStressMode()">Stress Analysis</button>
-                            <button class="control-button" onclick="showPredictiveMode()">Predictive Mode</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Parameter Controls -->
-                <div class="demo-control-panel">
-                    <div class="control-group">
-                        <div class="control-group-title">Hemodynamic Parameters</div>
-                        <div class="parameter-slider">
-                            <div class="slider-label">
-                                <span>Heart Rate</span>
-                                <span id="heartRateValue">72 bpm</span>
-                            </div>
-                            <input type="range" class="slider" id="heartRateSlider" min="40" max="180" value="72" oninput="updateHeartRate(this.value)">
-                        </div>
-                        <div class="parameter-slider">
-                            <div class="slider-label">
-                                <span>Systolic Pressure</span>
-                                <span id="systolicValue">120 mmHg</span>
-                            </div>
-                            <input type="range" class="slider" id="systolicSlider" min="80" max="200" value="120" oninput="updateSystolic(this.value)">
-                        </div>
-                        <div class="parameter-slider">
-                            <div class="slider-label">
-                                <span>Cardiac Output</span>
-                                <span id="outputValue">5.2 L/min</span>
-                            </div>
-                            <input type="range" class="slider" id="outputSlider" min="3" max="8" step="0.1" value="5.2" oninput="updateCardiacOutput(this.value)">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Real-time Metrics Dashboard -->
-                <div class="metrics-dashboard">
-                    <div class="metric-card">
-                        <div class="metric-icon">💗</div>
-                        <div class="metric-title">Ejection Fraction</div>
-                        <div class="metric-main-value" id="ejectionFraction">65%</div>
-                        <canvas class="metric-chart-container" id="efChart"></canvas>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon">📊</div>
-                        <div class="metric-title">Regurgitant Volume</div>
-                        <div class="metric-main-value" id="regurgVolume">5 mL</div>
-                        <canvas class="metric-chart-container" id="rvChart"></canvas>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon">🌊</div>
-                        <div class="metric-title">Mean Gradient</div>
-                        <div class="metric-main-value" id="meanGradient">3.2 mmHg</div>
-                        <canvas class="metric-chart-container" id="mgChart"></canvas>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon">⚡</div>
-                        <div class="metric-title">Coaptation Length</div>
-                        <div class="metric-main-value" id="coaptationLength">8.5 mm</div>
-                        <canvas class="metric-chart-container" id="clChart"></canvas>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon">🔄</div>
-                        <div class="metric-title">Effective Orifice Area</div>
-                        <div class="metric-main-value" id="effectiveArea">4.2 cm²</div>
-                        <canvas class="metric-chart-container" id="eoaChart"></canvas>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon">📈</div>
-                        <div class="metric-title">AI Confidence</div>
-                        <div class="metric-main-value" id="aiConfidence">98.5%</div>
-                        <canvas class="metric-chart-container" id="acChart"></canvas>
-                    </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Revolutionizing Cardiac Surgery with AI</h1>
+                <div class="subtitle">Precision. Intelligence. Innovation.</div>
+                <p>CardioVis pioneers the integration of artificial intelligence, computer vision, and robotics to transform cardiac valve surgery. Our comprehensive platform empowers surgeons with real-time guidance, predictive analytics, and precision tools that enhance patient outcomes and advance surgical education.</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn-primary">Explore Our Solutions</a>
+                    <a href="#contact" class="btn-secondary">Request Demo</a>
                 </div>
             </div>
-
-            <!-- Key Features Section -->
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🫀</div>
-                    <h3 class="feature-title">Patient-Specific Digital Twins</h3>
-                    <p class="feature-description">
-                        Our advanced digital twin technology creates precise virtual replicas of patient hearts from 3D TEE imaging. 
-                        These twins enable surgeons to rehearse procedures, test different approaches, and predict outcomes with 
-                        unprecedented accuracy before entering the operating room.
-                    </p>
-                    <div class="feature-stats">
-                        <div class="feature-stat">
-                            <div class="feature-stat-value">< 30min</div>
-                            <div class="feature-stat-label">Generation Time</div>
-                        </div>
-                        <div class="feature-stat">
-                            <div class="feature-stat-value">95%</div>
-                            <div class="feature-stat-label">Accuracy</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3 class="feature-title">AI-Enhanced Surgical Robotics</h3>
-                    <p class="feature-description">
-                        Intelligent assistance layer for robotic surgical platforms that provides real-time guidance, 
-                        maintains optimal camera positioning, and offers predictive suggestions during complex valve repairs. 
-                        Our system reduces procedure time by 35% while improving surgical precision.
-                    </p>
-                    <div class="feature-stats">
-                        <div class="feature-stat">
-                            <div class="feature-stat-value">35%</div>
-                            <div class="feature-stat-label">Time Reduction</div>
-                        </div>
-                        <div class="feature-stat">
-                            <div class="feature-stat-value">2mm</div>
-                            <div class="feature-stat-label">Precision</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">👁️</div>
-                    <h3 class="feature-title">Computer Vision Analytics</h3>
-                    <p class="feature-description">
-                        Advanced computer vision algorithms analyze surgical video in real-time, tracking instruments, 
-                        identifying anatomical structures, and monitoring surgical phases. Automatic generation of 
-                        post-operative reports and quality metrics for continuous improvement.
-                    </p>
-                    <div class="feature-stats">
-                        <div class="feature-stat">
-                            <div class="feature-stat-value">Real-time</div>
-                            <div class="feature-stat-label">Analysis</div>
-                        </div>
-                        <div class="feature-stat">
-                            <div class="feature-stat-value">98%</div>
-                            <div class="feature-stat-label">Detection Rate</div>
-                        </div>
-                    </div>
+            <div class="hero-visual">
+                <div class="heart-3d">
+                    <div class="heart-animation"></div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Clinical Impact Section -->
-            <div class="clinical-impact">
-                <h2 class="impact-title">Clinical Impact & Outcomes</h2>
-                <div class="impact-grid">
-                    <div class="impact-item">
-                        <div class="impact-number">40%</div>
-                        <div class="impact-label">Reduction in Complications</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-number">85%</div>
-                        <div class="impact-label">Improved First-Time Success</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-number">3.5 days</div>
-                        <div class="impact-label">Shorter Hospital Stay</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-number">$25K</div>
-                        <div class="impact-label">Cost Savings per Patient</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-number">500+</div>
-                        <div class="impact-label">Procedures Enhanced</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-number">15</div>
-                        <div class="impact-label">Partner Hospitals</div>
-                    </div>
-                </div>
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <h2>Our Product Suite</h2>
+            <p>Comprehensive AI-powered solutions designed to enhance every aspect of cardiac valve surgery</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon">🔐</div>
+                <h3>AUTO-VALVE Portal</h3>
+                <p>A secure edge-to-cloud portal that unifies multimodal cardiac surgery data with enterprise-grade security and compliance.</p>
+                <ul class="product-features">
+                    <li>Seamless integration of CT, 2D/3D TEE, and robotic video streams</li>
+                    <li>Automatic HIPAA-compliant de-identification</li>
+                    <li>Clock-true time synchronization across all data modalities</li>
+                    <li>Web-based UI/API for data ingestion and collaborative annotation</li>
+                    <li>Auto-annotation using advanced computer vision algorithms</li>
+                </ul>
+                <a href="#" class="learn-more" onclick="openModal('autoValve')">Learn more →</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">👁️</div>
+                <h3>Computer Vision for Cardiac Surgery</h3>
+                <p>Real-time surgical intelligence that transforms operative video into actionable insights and enhanced situational awareness.</p>
+                <ul class="product-features">
+                    <li>Automatic phase detection and procedural tracking</li>
+                    <li>Instrument and anatomical structure recognition</li>
+                    <li>Step-by-step timing analytics and optimization</li>
+                    <li>Automated generation of teaching clips</li>
+                    <li>Comprehensive post-operative summaries</li>
+                </ul>
+                <a href="#" class="learn-more" onclick="openModal('computerVision')">Learn more →</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">🤖</div>
+                <h3>AI Surgical Copilot</h3>
+                <p>A multimodal LLM assistant providing real-time decision support by analyzing video, imaging, and vital signs simultaneously.</p>
+                <ul class="product-features">
+                    <li>Real-time procedural guidance and context awareness</li>
+                    <li>Evidence-based recommendations with source citations</li>
+                    <li>Safety checklist integration and reminders</li>
+                    <li>Guideline-compliant decision support</li>
+                    <li>Surgeon-controlled confirmation workflow</li>
+                </ul>
+                <a href="#" class="learn-more" onclick="openModal('aiCopilot')">Learn more →</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">🫀</div>
+                <h3>Digital Twin for Cardiac Surgery</h3>
+                <p>Patient-specific virtual heart valve models enabling preoperative planning and outcome prediction with unprecedented accuracy.</p>
+                <ul class="product-features">
+                    <li>3D reconstruction from routine TEE or CT imaging</li>
+                    <li>Interactive "what-if" surgical planning scenarios</li>
+                    <li>Predictive modeling of repair outcomes</li>
+                    <li>Coaptation and hemodynamic analysis</li>
+                    <li>Educational visualization tools</li>
+                </ul>
+                <a href="#" class="learn-more" onclick="openModal('digitalTwin')">Learn more →</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">🎓</div>
+                <h3>Mitral Valve Simulator</h3>
+                <p>Advanced training platform combining physical and digital simulation for comprehensive surgical skill development.</p>
+                <ul class="product-features">
+                    <li>3D-printed silicone valve models with realistic haptics</li>
+                    <li>Compatible with standard and robotic instruments</li>
+                    <li>Real-time performance metrics and scoring</li>
+                    <li>Video-based debriefing and analysis</li>
+                    <li>Progressive skill-building curriculum</li>
+                </ul>
+                <a href="#" class="learn-more" onclick="openModal('simulator')">Learn more →</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-icon">🦾</div>
+                <h3>AI-Enhanced Surgical Robotics</h3>
+                <p>Intelligent assistance layer for robotic platforms that enhances precision while maintaining surgeon control.</p>
+                <ul class="product-features">
+                    <li>Camera autopilot with intelligent field management</li>
+                    <li>Proximity warnings and soft boundary guidance</li>
+                    <li>Suture planning and spacing optimization</li>
+                    <li>Integration with da Vinci and other platforms</li>
+                    <li>Full ROS 2 compatibility</li>
+                </ul>
+                <a href="#" class="learn-more" onclick="openModal('robotics')">Learn more →</a>
             </div>
         </div>
     </section>
 
     <!-- Technology Section -->
-    <section id="technology" class="content-section">
-        <h2 class="tech-section-title">Our Technology Platform</h2>
-        
-        <div class="tech-showcase">
-            <div class="tech-showcase-card">
-                <div class="tech-showcase-header">
-                    <h3 class="tech-showcase-title">AUTO-VALVE Portal</h3>
-                    <p class="tech-showcase-subtitle">Multimodal Surgical Data Platform</p>
-                </div>
-                <div class="tech-showcase-content">
-                    <ul class="tech-feature-list">
-                        <li class="tech-feature-item">HIPAA/GDPR-compliant cloud infrastructure</li>
-                        <li class="tech-feature-item">Automatic PHI de-identification and face blurring</li>
-                        <li class="tech-feature-item">IEEE-1588 precision time synchronization</li>
-                        <li class="tech-feature-item">Multi-modal data fusion (CT, 3D TEE, surgical video)</li>
-                        <li class="tech-feature-item">AI-powered automatic annotation engine</li>
-                        <li class="tech-feature-item">Real-time quality assurance dashboard</li>
-                    </ul>
-                    <div class="tech-specs">
-                        <div class="spec-row">
-                            <span class="spec-label">Processing Speed</span>
-                            <span class="spec-value">< 100ms latency</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Storage Capacity</span>
-                            <span class="spec-value">Petabyte-scale</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Security Level</span>
-                            <span class="spec-value">AES-256 encryption</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Uptime</span>
-                            <span class="spec-value">99.99% availability</span>
-                        </div>
-                    </div>
+    <section class="technology" id="technology">
+        <div class="section-header">
+            <h2>Cutting-Edge Technology Stack</h2>
+            <p>Built on proven frameworks and advanced AI architectures</p>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-content">
+                <h3>Advanced AI & Machine Learning</h3>
+                <p>Our platform leverages state-of-the-art deep learning models trained on extensive multimodal datasets. We employ transformer architectures, convolutional neural networks, and hybrid approaches to deliver unparalleled accuracy in surgical intelligence.</p>
+                <p>Every model is rigorously validated against clinical standards and continuously improved through federated learning approaches that maintain patient privacy while advancing collective knowledge.</p>
+                <div class="tech-stack">
+                    <div class="tech-item">Computer Vision</div>
+                    <div class="tech-item">Deep Learning</div>
+                    <div class="tech-item">Multimodal AI</div>
+                    <div class="tech-item">Edge Computing</div>
+                    <div class="tech-item">Cloud Infrastructure</div>
+                    <div class="tech-item">ROS Integration</div>
+                    <div class="tech-item">HIPAA Compliance</div>
+                    <div class="tech-item">Real-time Processing</div>
                 </div>
             </div>
-
-            <div class="tech-showcase-card">
-                <div class="tech-showcase-header">
-                    <h3 class="tech-showcase-title">Digital Twin Engine</h3>
-                    <p class="tech-showcase-subtitle">Physics-Based Cardiac Modeling</p>
-                </div>
-                <div class="tech-showcase-content">
-                    <ul class="tech-feature-list">
-                        <li class="tech-feature-item">GPU-accelerated finite element solver</li>
-                        <li class="tech-feature-item">Patient-specific geometry from 3D TEE</li>
-                        <li class="tech-feature-item">Real-time fluid-structure interaction</li>
-                        <li class="tech-feature-item">Bayesian uncertainty quantification</li>
-                        <li class="tech-feature-item">Predictive outcome modeling</li>
-                        <li class="tech-feature-item">Multi-scale biomechanics simulation</li>
-                    </ul>
-                    <div class="tech-specs">
-                        <div class="spec-row">
-                            <span class="spec-label">Mesh Resolution</span>
-                            <span class="spec-value">< 0.5mm elements</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Simulation Time</span>
-                            <span class="spec-value">< 30 seconds/beat</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Accuracy</span>
-                            <span class="spec-value">95% CI bounds</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">GPU Memory</span>
-                            <span class="spec-value">< 18GB VRAM</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="tech-visual">
+                <div class="tech-animation"></div>
             </div>
+        </div>
+    </section>
 
-            <div class="tech-showcase-card">
-                <div class="tech-showcase-header">
-                    <h3 class="tech-showcase-title">AI Vision System</h3>
-                    <p class="tech-showcase-subtitle">Surgical Scene Understanding</p>
-                </div>
-                <div class="tech-showcase-content">
-                    <ul class="tech-feature-list">
-                        <li class="tech-feature-item">YOLOv8-Cardio instrument detection</li>
-                        <li class="tech-feature-item">SAM2-Valve anatomy segmentation</li>
-                        <li class="tech-feature-item">Swin-Transformer phase recognition</li>
-                        <li class="tech-feature-item">Real-time surgical workflow analysis</li>
-                        <li class="tech-feature-item">Automatic complication detection</li>
-                        <li class="tech-feature-item">Quality metrics generation</li>
-                    </ul>
-                    <div class="tech-specs">
-                        <div class="spec-row">
-                            <span class="spec-label">Detection mAP</span>
-                            <span class="spec-value">> 0.95</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Segmentation Dice</span>
-                            <span class="spec-value">> 0.90</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Phase Accuracy</span>
-                            <span class="spec-value">> 92%</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">FPS</span>
-                            <span class="spec-value">45+ frames/sec</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Clinical Impact Section -->
+    <section class="impact" id="impact">
+        <div class="section-header">
+            <h2>Measurable Clinical Impact</h2>
+            <p>Transforming outcomes through precision and intelligence</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">35%</div>
+                <div class="stat-label">Reduction in Procedure Time</div>
             </div>
-
-            <div class="tech-showcase-card">
-                <div class="tech-showcase-header">
-                    <h3 class="tech-showcase-title">Robotic Assist Layer</h3>
-                    <p class="tech-showcase-subtitle">Intelligent Surgical Automation</p>
-                </div>
-                <div class="tech-showcase-content">
-                    <ul class="tech-feature-list">
-                        <li class="tech-feature-item">Camera autopilot with keep-in-view</li>
-                        <li class="tech-feature-item">Proximity warnings and soft no-go zones</li>
-                        <li class="tech-feature-item">Suture planning and spacing hints</li>
-                        <li class="tech-feature-item">Ring sizing recommendations</li>
-                        <li class="tech-feature-item">Tremor filtration and motion scaling</li>
-                        <li class="tech-feature-item">Haptic feedback integration</li>
-                    </ul>
-                    <div class="tech-specs">
-                        <div class="spec-row">
-                            <span class="spec-label">Control Frequency</span>
-                            <span class="spec-value">1000 Hz</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Positioning Accuracy</span>
-                            <span class="spec-value">< 1mm</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Response Time</span>
-                            <span class="spec-value">< 10ms</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Safety Rating</span>
-                            <span class="spec-value">IEC 60601-1</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="stat-card">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Surgical Cases Enhanced</div>
             </div>
-
-            <div class="tech-showcase-card">
-                <div class="tech-showcase-header">
-                    <h3 class="tech-showcase-title">Multimodal LLM Copilot</h3>
-                    <p class="tech-showcase-subtitle">Real-time Surgical Intelligence</p>
-                </div>
-                <div class="tech-showcase-content">
-                    <ul class="tech-feature-list">
-                        <li class="tech-feature-item">Concurrent video and TEE analysis</li>
-                        <li class="tech-feature-item">Evidence-based recommendations</li>
-                        <li class="tech-feature-item">Safety checklist monitoring</li>
-                        <li class="tech-feature-item">Guideline compliance checking</li>
-                        <li class="tech-feature-item">Natural language interaction</li>
-                        <li class="tech-feature-item">Context-aware alerts</li>
-                    </ul>
-                    <div class="tech-specs">
-                        <div class="spec-row">
-                            <span class="spec-label">Model Size</span>
-                            <span class="spec-value">70B parameters</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Response Time</span>
-                            <span class="spec-value">< 500ms</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Accuracy</span>
-                            <span class="spec-value">98.5%</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Languages</span>
-                            <span class="spec-value">12 supported</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="stat-card">
+                <div class="stat-number">98.5%</div>
+                <div class="stat-label">AI Prediction Accuracy</div>
             </div>
-
-            <div class="tech-showcase-card">
-                <div class="tech-showcase-header">
-                    <h3 class="tech-showcase-title">Training Simulator</h3>
-                    <p class="tech-showcase-subtitle">Surgical Education Platform</p>
-                </div>
-                <div class="tech-showcase-content">
-                    <ul class="tech-feature-list">
-                        <li class="tech-feature-item">3D-printed silicone valve models</li>
-                        <li class="tech-feature-item">Pulse duplicator with real-time metrics</li>
-                        <li class="tech-feature-item">dVRK robotic integration</li>
-                        <li class="tech-feature-item">Performance scoring algorithms</li>
-                        <li class="tech-feature-item">Video-based skills assessment</li>
-                        <li class="tech-feature-item">Competency tracking dashboard</li>
-                    </ul>
-                    <div class="tech-specs">
-                        <div class="spec-row">
-                            <span class="spec-label">Model Fidelity</span>
-                            <span class="spec-value">Anatomically accurate</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Metrics Tracked</span>
-                            <span class="spec-value">25+ parameters</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Cost</span>
-                            <span class="spec-value">< $500/model</span>
-                        </div>
-                        <div class="spec-row">
-                            <span class="spec-label">Setup Time</span>
-                            <span class="spec-value">< 10 minutes</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="stat-card">
+                <div class="stat-number">4x</div>
+                <div class="stat-label">Faster Training Progress</div>
             </div>
         </div>
     </section>
 
     <!-- Research Section -->
-    <section id="research" class="content-section">
-        <h2 class="tech-section-title">Research & Innovation</h2>
-        
-        <div class="research-timeline">
-            <div class="timeline-line"></div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">2025</div>
-                    <h3 class="timeline-title">NIH R21 Grant Awarded</h3>
-                    <p class="timeline-description">
-                        $275,000 grant for developing personalized echo-driven mitral valve digital twins for precision 
-                        surgical and transcatheter-based interventions. This groundbreaking research will enable real-time 
-                        intraoperative guidance using 3D transesophageal echocardiography.
-                    </p>
-                    <div class="timeline-tags">
-                        <span class="timeline-tag">Digital Twins</span>
-                        <span class="timeline-tag">NIH NIBIB</span>
-                        <span class="timeline-tag">3D TEE</span>
-                    </div>
-                </div>
-                <div class="timeline-dot">1</div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">2024</div>
-                    <h3 class="timeline-title">AUTO-VALVE Registry Launch</h3>
-                    <p class="timeline-description">
-                        First open-access multimodal registry integrating CT, 3D TEE, and surgical video with real-time 
-                        auto-annotation engine. The platform enables secure data sharing across institutions and accelerates 
-                        AI model development for valve surgery.
-                    </p>
-                    <div class="timeline-tags">
-                        <span class="timeline-tag">Cloud Platform</span>
-                        <span class="timeline-tag">AI Annotation</span>
-                        <span class="timeline-tag">HIPAA Compliant</span>
-                    </div>
-                </div>
-                <div class="timeline-dot">2</div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">2024</div>
-                    <h3 class="timeline-title">SUNY Poly Partnership</h3>
-                    <p class="timeline-description">
-                        Establishing medical robotics research hub with shared bench-top surgical robotics testbeds, 
-                        co-created open datasets, and undergraduate robotics pipeline. Partnership includes development 
-                        of new courses and capstone projects in medical robotics.
-                    </p>
-                    <div class="timeline-tags">
-                        <span class="timeline-tag">Academic Partnership</span>
-                        <span class="timeline-tag">dVRK Platform</span>
-                        <span class="timeline-tag">Education</span>
-                    </div>
-                </div>
-                <div class="timeline-dot">3</div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">2023</div>
-                    <h3 class="timeline-title">Living Heart Project Collaboration</h3>
-                    <p class="timeline-description">
-                        Strategic partnership with Dassault Systèmes' Living Heart Project for high-fidelity cardiac models 
-                        and simulation tooling. This collaboration provides access to anatomically accurate valve meshes 
-                        and GPU-ready simulation frameworks.
-                    </p>
-                    <div class="timeline-tags">
-                        <span class="timeline-tag">Industry Partner</span>
-                        <span class="timeline-tag">3DEXPERIENCE</span>
-                        <span class="timeline-tag">Simulation</span>
-                    </div>
-                </div>
-                <div class="timeline-dot">4</div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">2023</div>
-                    <h3 class="timeline-title">NSF EiR Submission</h3>
-                    <p class="timeline-description">
-                        $597,613 proposal for quantum-inspired uncertainty-aware multimodal digital twins for precision 
-                        mitral-aortic valve sizing. Research focuses on Bayesian uncertainty quantification and 
-                        polynomial-chaos expansion for surgical prediction.
-                    </p>
-                    <div class="timeline-tags">
-                        <span class="timeline-tag">NSF HBCU-EiR</span>
-                        <span class="timeline-tag">Uncertainty Quantification</span>
-                        <span class="timeline-tag">Quantum Computing</span>
-                    </div>
-                </div>
-                <div class="timeline-dot">5</div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="timeline-date">2022</div>
-                    <h3 class="timeline-title">Intuitive Surgical Grant</h3>
-                    <p class="timeline-description">
-                        $75,000 research grant for comparative effectiveness of robotic-assisted vs. open mitral valve 
-                        surgery using national registry data. Study analyzes outcomes from over 76,000 procedures to 
-                        quantify the benefits of robotic approaches.
-                    </p>
-                    <div class="timeline-tags">
-                        <span class="timeline-tag">Robotic Surgery</span>
-                        <span class="timeline-tag">Clinical Outcomes</span>
-                        <span class="timeline-tag">Big Data</span>
-                    </div>
-                </div>
-                <div class="timeline-dot">6</div>
-            </div>
+    <section class="research" id="research">
+        <div class="section-header">
+            <h2>Research & Innovation</h2>
+            <p>Advancing the frontiers of cardiac surgical technology</p>
         </div>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team" class="content-section">
-        <h2 class="tech-section-title">Leadership Team</h2>
-        
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="team-avatar">JK</div>
-                <h3 class="team-name">Dr. Jacques Kpodonu, MD</h3>
-                <p class="team-role">Co-founder</p>
-                <p class="team-bio">
-                    Cardiac surgeon at Beth Israel Deaconess Medical Center, Harvard Medical School. Director of the 
-                    Cardiovascular AI Network (CAIN) Laboratory. Built the first $6.7M hybrid aortic operating room. 
-                    Author of 200+ publications and 5 textbooks on cardiac surgery and AI-enabled medical imaging.
-                </p>
-                <div class="team-credentials">
-                    <span class="credential-tag">Harvard Medical School</span>
-                    <span class="credential-tag">BIDMC</span>
-                    <span class="credential-tag">NIH R21/R33 PI</span>
-                </div>
-                <div class="team-links">
-                    <a href="#" class="team-link">📧</a>
-                    <a href="#" class="team-link">🔗</a>
-                    <a href="#" class="team-link">📚</a>
-                </div>
+        <div class="research-areas">
+            <div class="research-card">
+                <h4>Quantum-Inspired Computing</h4>
+                <p>Exploring quantum-inspired algorithms for uncertainty quantification in surgical planning and real-time decision support, enabling more robust predictions in complex cardiac procedures.</p>
             </div>
-            
-            <div class="team-member">
-                <div class="team-avatar">PH</div>
-                <h3 class="team-name">Dr. Phat K. Huynh, PhD</h3>
-                <p class="team-role">Co-founder</p>
-                <p class="team-bio">
-                    Assistant Professor at North Carolina A&T State University. Director of the PASSIO AI Laboratory. 
-                    Holds $2.55M DOE-CESER award for secure real-time platforms. Author of 40+ publications on medical 
-                    imaging, cardiovascular digital twins, and surgical computer vision.
-                </p>
-                <div class="team-credentials">
-                    <span class="credential-tag">NC A&T State</span>
-                    <span class="credential-tag">PASSIO Lab</span>
-                    <span class="credential-tag">DOE Award</span>
-                </div>
-                <div class="team-links">
-                    <a href="#" class="team-link">📧</a>
-                    <a href="#" class="team-link">🔗</a>
-                    <a href="#" class="team-link">📚</a>
-                </div>
+            <div class="research-card">
+                <h4>Federated Learning Networks</h4>
+                <p>Developing privacy-preserving machine learning frameworks that enable multi-institutional collaboration while maintaining complete patient data security and regulatory compliance.</p>
             </div>
-            
-            <div class="team-member">
-                <div class="team-avatar">DN</div>
-                <h3 class="team-name">Dang Nguyen</h3>
-                <p class="team-role">Co-founder</p>
-                <p class="team-bio">
-                    Clinical team manager with extensive experience in healthcare technology implementation. 
-                    Harvard T.H. Chan School of Public Health background. Oversees multi-institutional clinical 
-                    coordination and data collection efforts across partner hospitals.
-                </p>
-                <div class="team-credentials">
-                    <span class="credential-tag">Harvard T.H. Chan</span>
-                    <span class="credential-tag">Clinical Operations</span>
-                    <span class="credential-tag">Data Management</span>
-                </div>
-                <div class="team-links">
-                    <a href="#" class="team-link">📧</a>
-                    <a href="#" class="team-link">🔗</a>
-                    <a href="#" class="team-link">📚</a>
-                </div>
+            <div class="research-card">
+                <h4>Biomechanical Modeling</h4>
+                <p>Creating high-fidelity computational models of cardiac valve dynamics that accurately predict surgical outcomes and optimize repair strategies for individual patient anatomy.</p>
             </div>
-            
-            <div class="team-member">
-                <div class="team-avatar">HR</div>
-                <h3 class="team-name">Heath Rutledge-Jukes</h3>
-                <p class="team-role">Co-founder</p>
-                <p class="team-bio">
-                    CEO of King of the Curve. Business development expert with focus on healthcare technology 
-                    commercialization. Leads strategic partnerships and investor relations. Expertise in scaling 
-                    medical device startups and navigating regulatory pathways.
-                </p>
-                <div class="team-credentials">
-                    <span class="credential-tag">King of the Curve</span>
-                    <span class="credential-tag">Business Development</span>
-                    <span class="credential-tag">Strategic Partnerships</span>
-                </div>
-                <div class="team-links">
-                    <a href="#" class="team-link">📧</a>
-                    <a href="#" class="team-link">🔗</a>
-                    <a href="#" class="team-link">📚</a>
-                </div>
+            <div class="research-card">
+                <h4>Autonomous Surgical Subtasks</h4>
+                <p>Researching semi-autonomous capabilities for repetitive surgical subtasks while maintaining surgeon oversight and control, enhancing precision and reducing cognitive load.</p>
             </div>
-        </div>
-
-        <h2 class="tech-section-title" style="margin-top: 4rem;">Research Staff & Collaborators</h2>
-        
-        <div class="team-grid">
-            <div class="team-member">
-                <div class="team-avatar">DH</div>
-                <h3 class="team-name">Prof. Dinh Hoang Nguyen</h3>
-                <p class="team-role">Senior Cardiac Surgeon</p>
-                <p class="team-bio">
-                    Full Professor at University Medical Center Ho Chi Minh City, Vietnam. Oversees clinical team 
-                    and contributes 50+ annotated valve cases annually. Expert in minimally invasive cardiac surgery.
-                </p>
-                <div class="team-credentials">
-                    <span class="credential-tag">UMC-HCMC</span>
-                    <span class="credential-tag">Clinical Lead Vietnam</span>
-                </div>
+            <div class="research-card">
+                <h4>Multimodal Data Fusion</h4>
+                <p>Advancing techniques for real-time integration of imaging, kinematics, and physiological data streams to create comprehensive surgical awareness systems.</p>
             </div>
-
-            <div class="team-member">
-                <div class="team-avatar">ML</div>
-                <h3 class="team-name">Dr. Minh H.N. Le, MD, PhD</h3>
-                <p class="team-role">Post-doctoral Fellow</p>
-                <p class="team-bio">
-                    Interventional Cardiology Department, Methodist Hospital. Technical manager in AI and clinical 
-                    coordinator. Expertise in transcatheter valve interventions and medical image analysis.
-                </p>
-                <div class="team-credentials">
-                    <span class="credential-tag">Methodist Hospital</span>
-                    <span class="credential-tag">Interventional Cardiology</span>
-                </div>
-            </div>
-
-            <div class="team-member">
-                <div class="team-avatar">TQ</div>
-                <h3 class="team-name">Dr. Thuan Q. Pham, MD</h3>
-                <p class="team-role">Post-doctoral Fellow</p>
-                <p class="team-bio">
-                    Cardiac surgeon at UMC-HCMC. Clinical coordinator for data annotation and validation. 
-                    Specializes in complex valve repairs and provides surgical expertise for algorithm development.
-                </p>
-                <div class="team-credentials">
-                    <span class="credential-tag">UMC-HCMC</span>
-                    <span class="credential-tag">Valve Surgery</span>
-                </div>
-            </div>
-
-            <div class="team-member">
-                <div class="team-avatar">DN</div>
-                <h3 class="team-name">Duy T.H. Nguyen, MSc</h3>
-                <p class="team-role">PhD Student</p>
-                <p class="team-bio">
-                    Leading core projects in AI and robotics at NC A&T. Focus on deep learning for surgical 
-                    video analysis and real-time instrument tracking. Published 5+ papers on medical AI.
-                </p>
-                <div class="team-credentials">
-                    <span class="credential-tag">NC A&T</span>
-                    <span class="credential-tag">Computer Vision</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications Section -->
-    <section id="publications" class="content-section">
-        <h2 class="tech-section-title">Selected Publications</h2>
-        
-        <div class="publication-filters">
-            <button class="filter-button active">All</button>
-            <button class="filter-button">Digital Twins</button>
-            <button class="filter-button">AI & Machine Learning</button>
-            <button class="filter-button">Surgical Robotics</button>
-            <button class="filter-button">Clinical Studies</button>
-        </div>
-        
-        <div class="publications-grid">
-            <div class="publication-card">
-                <span class="publication-type">Conference Paper</span>
-                <h3 class="publication-title">3-D TEE Mitral Valve Segmentation and Mesh Reconstruction with Real-Time Quality Assurance</h3>
-                <p class="publication-authors">Huynh PK, Kpodonu J, Le MHN, Nguyen D, Olabiyi O, Rutledge-Jukes H, Xu Y, Phan TQ, Nguyen DH</p>
-                <p class="publication-journal">IEEE-EMBS International Conference on Biomedical and Health Informatics (BHI 2025)</p>
-                <p class="publication-abstract">
-                    We present a real-time pipeline for segmenting mitral valve structures from 3D transesophageal 
-                    echocardiography using Swin-UNETR architecture, achieving Dice scores of 0.832±0.051 with 
-                    automated quality assurance...
-                </p>
-                <div class="publication-metrics">
-                    <span class="publication-metric">📖 15 Citations</span>
-                    <span class="publication-metric">👁️ 250 Views</span>
-                </div>
-            </div>
-            
-            <div class="publication-card">
-                <span class="publication-type">Journal Article</span>
-                <h3 class="publication-title">Dual-Regulator Conformal Prediction for Medical Digital Twin Uncertainty</h3>
-                <p class="publication-authors">Yong Y, Huynh PK, Xu Y, Kpodonu J</p>
-                <p class="publication-journal">2026 Annual Reliability and Maintainability Symposium (RAMS)</p>
-                <p class="publication-abstract">
-                    Novel uncertainty quantification framework for cardiac digital twins using conformal prediction 
-                    with dual regulators. Provides rigorous confidence bounds for surgical outcome predictions...
-                </p>
-                <div class="publication-metrics">
-                    <span class="publication-metric">📖 8 Citations</span>
-                    <span class="publication-metric">👁️ 180 Views</span>
-                </div>
-            </div>
-            
-            <div class="publication-card">
-                <span class="publication-type">Book Chapter</span>
-                <h3 class="publication-title">Artificial Intelligence Driven Robotic Surgery – Foundations, Innovations and Future Directions</h3>
-                <p class="publication-authors">Multiple Authors (CardioVis Team)</p>
-                <p class="publication-journal">Springer Nature Switzerland AG (Expected 2026)</p>
-                <p class="publication-abstract">
-                    Comprehensive textbook covering AI applications in robotic cardiac surgery, including digital twins, 
-                    computer vision, and autonomous assistance systems. Features case studies from CardioVis platform...
-                </p>
-                <div class="publication-metrics">
-                    <span class="publication-metric">📖 Pre-order</span>
-                    <span class="publication-metric">👁️ 500+ Interest</span>
-                </div>
-            </div>
-            
-            <div class="publication-card">
-                <span class="publication-type">Journal Article</span>
-                <h3 class="publication-title">HCM-Echo-VAR-Ensemble: Deep Ensemble Fusion to Detect Hypertrophic Cardiomyopathy</h3>
-                <p class="publication-authors">Almadani A, Sarwar A, Agu E, Ahluwalia M, Kpodonu J</p>
-                <p class="publication-journal">IEEE Open Journal of Engineering in Medicine and Biology (2024)</p>
-                <p class="publication-abstract">
-                    Deep learning ensemble approach for detecting hypertrophic cardiomyopathy from echocardiograms. 
-                    Achieves 98.5% accuracy using multi-view fusion and attention mechanisms...
-                </p>
-                <div class="publication-metrics">
-                    <span class="publication-metric">📖 22 Citations</span>
-                    <span class="publication-metric">👁️ 450 Views</span>
-                </div>
-            </div>
-            
-            <div class="publication-card">
-                <span class="publication-type">Conference Abstract</span>
-                <h3 class="publication-title">Real-time Deep-Learning Segmentation of Left-Heart Chambers on Transthoracic Echocardiography</h3>
-                <p class="publication-authors">Huynh PK, Nguyen D, Truong T, Rutledge-Jukes H, et al.</p>
-                <p class="publication-journal">Mitral Conclave 2025, American Association for Thoracic Surgery</p>
-                <p class="publication-abstract">
-                    Transformer-based architecture for real-time segmentation of cardiac chambers from TTE. 
-                    Processes full volumes in under 100ms with clinical-grade accuracy for valve assessment...
-                </p>
-                <div class="publication-metrics">
-                    <span class="publication-metric">📖 New</span>
-                    <span class="publication-metric">👁️ 120 Views</span>
-                </div>
-            </div>
-            
-            <div class="publication-card">
-                <span class="publication-type">Review Article</span>
-                <h3 class="publication-title">Artificial Intelligence in Cardiac Surgery: A Systematic Review</h3>
-                <p class="publication-authors">Sulague RM, Beloy FJ, Medina JR, Mortalla ED, Cartojano TD, Macapagal S, Kpodonu J</p>
-                <p class="publication-journal">World Journal of Surgery (2024)</p>
-                <p class="publication-abstract">
-                    Systematic review of 175 papers on AI applications in cardiac surgery. Identifies key gaps in 
-                    intraoperative video analysis and multimodal data fusion for surgical guidance...
-                </p>
-                <div class="publication-metrics">
-                    <span class="publication-metric">📖 35 Citations</span>
-                    <span class="publication-metric">👁️ 890 Views</span>
-                </div>
+            <div class="research-card">
+                <h4>Surgical Education Analytics</h4>
+                <p>Developing objective performance metrics and personalized training pathways using AI-driven skill assessment and competency tracking frameworks.</p>
             </div>
         </div>
     </section>
 
     <!-- Partners Section -->
-    <section id="partners" class="content-section">
-        <div class="partners-section">
-            <h2 class="partners-title">Partners & Collaborators</h2>
-            
-            <div class="partners-grid">
-                <div class="partner-card">
-                    <div class="partner-logo">🏥</div>
-                    <div class="partner-name">Beth Israel Deaconess</div>
-                    <div class="partner-type">Clinical Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">🎓</div>
-                    <div class="partner-name">Harvard Medical School</div>
-                    <div class="partner-type">Academic Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">🤖</div>
-                    <div class="partner-name">Intuitive Surgical</div>
-                    <div class="partner-type">Industry Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">💻</div>
-                    <div class="partner-name">Dassault Systèmes</div>
-                    <div class="partner-type">Technology Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">🏫</div>
-                    <div class="partner-name">NC A&T State University</div>
-                    <div class="partner-type">Research Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">🏨</div>
-                    <div class="partner-name">UMC Ho Chi Minh City</div>
-                    <div class="partner-type">Clinical Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">🔬</div>
-                    <div class="partner-name">SUNY Polytechnic</div>
-                    <div class="partner-type">Academic Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">🌐</div>
-                    <div class="partner-name">Google Cloud</div>
-                    <div class="partner-type">Technology Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">🏥</div>
-                    <div class="partner-name">Henri Mondor Hospital</div>
-                    <div class="partner-type">Clinical Partner</div>
-                </div>
-                
-                <div class="partner-card">
-                    <div class="partner-logo">💊</div>
-                    <div class="partner-name">Corcym</div>
-                    <div class="partner-type">Industry Partner</div>
-                </div>
+    <section class="partners" id="partners">
+        <div class="section-header">
+            <h2>Strategic Partnerships</h2>
+            <p>Collaborating with leading institutions and technology partners</p>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-logo">
+                <h5>Intuitive Surgical</h5>
+            </div>
+            <div class="partner-logo">
+                <h5>Dassault Systèmes</h5>
+            </div>
+            <div class="partner-logo">
+                <h5>Google Cloud AI</h5>
+            </div>
+            <div class="partner-logo">
+                <h5>Corcym</h5>
+            </div>
+            <div class="partner-logo">
+                <h5>SUNY Polytechnic</h5>
+            </div>
+            <div class="partner-logo">
+                <h5>Henri Mondor Hospital</h5>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="publications" id="publications">
+        <div class="section-header">
+            <h2>Recent Publications</h2>
+            <p>Peer-reviewed research advancing the field</p>
+        </div>
+        <div class="pub-list">
+            <div class="pub-item">
+                <div class="pub-title">Artificial Intelligence Driven Robotic Surgery – Foundations, Innovations and Future Directions</div>
+                <div class="pub-authors">CardioVis Research Team</div>
+                <div class="pub-venue">Springer Nature Switzerland AG (Expected 2026)</div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title">3-D TEE Mitral Valve Segmentation and Mesh Reconstruction with Real-Time Quality Assurance</div>
+                <div class="pub-authors">CardioVis AI Team</div>
+                <div class="pub-venue">IEEE-EMBS International Conference on Biomedical and Health Informatics (BHI'25)</div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title">Dual-Regulator Conformal Prediction for Medical Digital Twin Uncertainty</div>
+                <div class="pub-authors">CardioVis Research Group</div>
+                <div class="pub-venue">2026 Annual Reliability and Maintainability Symposium (RAMS)</div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title">A Real-Time Uncertainty-Aware Digital Twin Framework for Intra-Operative Valve Surgery Guidance</div>
+                <div class="pub-authors">CardioVis Engineering Team</div>
+                <div class="pub-venue">2026 Annual Reliability and Maintainability Symposium (RAMS)</div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title">Retrieval Verified Trust Envelopes: Hallucination Safe Chest X-Ray Reporting with Frozen Large Language Models</div>
+                <div class="pub-authors">CardioVis ML Team</div>
+                <div class="pub-venue">The 2nd International Conference on Health Science and Technology (ICHST-2025)</div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="content-section">
-        <div class="contact-container">
-            <div class="contact-header">
-                <h2 class="contact-title">Get in Touch</h2>
-                <p class="contact-subtitle">
-                    Partner with us to revolutionize cardiac surgery through AI and digital twin technology
-                </p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-form">
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Transform Your Surgical Practice</h2>
+            <p>Join the future of cardiac surgery with CardioVis</p>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-input" placeholder="Your name">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-input" placeholder="your.email@example.com">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
-                    
+                </div>
+                <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Organization</label>
-                        <input type="text" class="form-input" placeholder="Your organization">
+                        <label for="institution">Institution</label>
+                        <input type="text" id="institution" name="institution" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label class="form-label">Interest</label>
-                        <select class="form-input">
-                            <option>Partnership Opportunity</option>
-                            <option>Research Collaboration</option>
-                            <option>Clinical Trial</option>
-                            <option>Investment</option>
-                            <option>Product Demo</option>
-                            <option>Other</option>
+                        <label for="role">Your Role</label>
+                        <select id="role" name="role" required>
+                            <option value="">Select your role</option>
+                            <option value="surgeon">Cardiac Surgeon</option>
+                            <option value="administrator">Hospital Administrator</option>
+                            <option value="researcher">Researcher</option>
+                            <option value="educator">Medical Educator</option>
+                            <option value="industry">Industry Partner</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea class="form-textarea" placeholder="Tell us about your interest in CardioVis..."></textarea>
-                    </div>
-                    
-                    <button class="form-submit">Send Message</button>
                 </div>
-                
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-details">
-                            <div class="contact-label">Email</div>
-                            <div class="contact-value">contact@cardiovis.ai</div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">🏢</div>
-                        <div class="contact-details">
-                            <div class="contact-label">Headquarters</div>
-                            <div class="contact-value">Boston, MA 02215</div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">🔬</div>
-                        <div class="contact-details">
-                            <div class="contact-label">Research Labs</div>
-                            <div class="contact-value">BIDMC & NC A&T State University</div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div class="contact-details">
-                            <div class="contact-label">Phone</div>
-                            <div class="contact-value">+1 (617) 555-0100</div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">🌍</div>
-                        <div class="contact-details">
-                            <div class="contact-label">Global Presence</div>
-                            <div class="contact-value">USA • Europe • Asia</div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="interest">Product Interest</label>
+                    <select id="interest" name="interest" required>
+                        <option value="">Select primary interest</option>
+                        <option value="auto-valve">AUTO-VALVE Portal</option>
+                        <option value="computer-vision">Computer Vision Solutions</option>
+                        <option value="ai-copilot">AI Surgical Copilot</option>
+                        <option value="digital-twin">Digital Twin Technology</option>
+                        <option value="simulator">Training Simulators</option>
+                        <option value="robotics">Robotic Enhancement</option>
+                        <option value="all">Complete Platform</option>
+                    </select>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your needs and how we can help transform your surgical practice..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Request Information</button>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
         <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="footer-logo">CardioVis</div>
-                    <p class="footer-description">
-                        Revolutionizing cardiac surgery through AI-powered digital twins and surgical intelligence. 
-                        Our mission is to make every cardiac intervention safer, faster, and more predictable.
-                    </p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">📧</a>
-                        <a href="#" class="social-link">🔗</a>
-                        <a href="#" class="social-link">📚</a>
-                        <a href="#" class="social-link">🐦</a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Technology</h4>
-                    <a href="#" class="footer-link">Digital Twins</a>
-                    <a href="#" class="footer-link">AI Vision</a>
-                    <a href="#" class="footer-link">Surgical Robotics</a>
-                    <a href="#" class="footer-link">AUTO-VALVE Portal</a>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Resources</h4>
-                    <a href="#" class="footer-link">Publications</a>
-                    <a href="#" class="footer-link">Research</a>
-                    <a href="#" class="footer-link">Case Studies</a>
-                    <a href="#" class="footer-link">Documentation</a>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 class="footer-column-title">Company</h4>
-                    <a href="#" class="footer-link">About Us</a>
-                    <a href="#" class="footer-link">Careers</a>
-                    <a href="#" class="footer-link">News</a>
-                    <a href="#" class="footer-link">Contact</a>
-                </div>
+            <div class="footer-section">
+                <h4>CardioVis</h4>
+                <p>Pioneering AI-driven innovation in cardiac surgery for better patient outcomes worldwide.</p>
             </div>
-            
-            <div class="footer-divider"></div>
-            
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    © 2025 CardioVis. All rights reserved. Revolutionizing cardiac surgery through AI.
-                </div>
-                <div class="footer-legal">
-                    <a href="#" class="footer-link">Privacy Policy</a>
-                    <a href="#" class="footer-link">Terms of Service</a>
-                    <a href="#" class="footer-link">HIPAA Compliance</a>
-                </div>
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#products">AUTO-VALVE Portal</a></li>
+                    <li><a href="#products">Computer Vision Suite</a></li>
+                    <li><a href="#products">AI Surgical Copilot</a></li>
+                    <li><a href="#products">Digital Twin Platform</a></li>
+                    <li><a href="#products">Training Solutions</a></li>
+                </ul>
             </div>
+            <div class="footer-section">
+                <h4>Research</h4>
+                <ul>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#research">Innovation Areas</a></li>
+                    <li><a href="#partners">Collaborations</a></li>
+                    <li><a href="#impact">Clinical Studies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CardioVis. All rights reserved. | Advancing Cardiac Surgery Through Innovation</p>
         </div>
     </footer>
 
+    <!-- Product Detail Modals -->
+    <div id="autoValveModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('autoValve')">&times;</span>
+            <h3>AUTO-VALVE Portal</h3>
+            <div class="modal-section">
+                <h4>Comprehensive Data Integration Platform</h4>
+                <p>The AUTO-VALVE Portal represents a breakthrough in surgical data management, providing seamless integration of multimodal cardiac surgery data streams. Our platform unifies CT imaging, 2D/3D transesophageal echocardiography (TEE), and endoscopic/robotic video feeds into a single, coherent system that maintains perfect temporal synchronization across all modalities.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Key Capabilities</h4>
+                <ul>
+                    <li>Automatic HIPAA-compliant de-identification ensuring patient privacy while enabling research</li>
+                    <li>Clock-true time synchronization across all data streams for accurate event correlation</li>
+                    <li>Clean web UI/API supporting data ingestion, search, streaming, and collaborative annotation</li>
+                    <li>Advanced computer vision hooks for automatic annotation of surgical phases, instruments, and anatomy</li>
+                    <li>Standardized ontologies ensuring reproducible benchmarks and consistent model training</li>
+                    <li>Edge-to-cloud architecture enabling both local processing and cloud-based analytics</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Clinical Benefits</h4>
+                <p>By centralizing and standardizing surgical data, AUTO-VALVE enables unprecedented insights into surgical performance, patient outcomes, and best practices. Surgeons can review cases with perfect multimodal alignment, researchers can access curated datasets for AI development, and institutions can benchmark their performance against anonymized global standards.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="computerVisionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('computerVision')">&times;</span>
+            <h3>Computer Vision for Cardiac Surgery</h3>
+            <div class="modal-section">
+                <h4>Real-Time Surgical Intelligence</h4>
+                <p>Our computer vision system acts as an intelligent observer in the operating room, continuously analyzing operative video and TEE imaging to provide real-time insights and documentation. The system understands surgical context, tracks procedural progress, and identifies critical anatomical structures and instruments without any manual input.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Advanced Features</h4>
+                <ul>
+                    <li>Automatic phase detection identifying current procedural step with 98.5% accuracy</li>
+                    <li>Real-time instrument tracking and usage analytics for efficiency optimization</li>
+                    <li>Anatomical structure recognition with automated labeling and measurement</li>
+                    <li>Step-by-step timing analytics comparing against benchmarks and best practices</li>
+                    <li>Automatic generation of teaching clips highlighting key techniques and decision points</li>
+                    <li>Comprehensive post-case summaries including time-in-step metrics and performance indicators</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Educational Impact</h4>
+                <p>The system transforms every surgery into a learning opportunity by automatically creating annotated teaching materials, identifying exemplary techniques, and providing objective performance metrics. This enables more effective training, faster skill acquisition, and continuous improvement across surgical teams.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="aiCopilotModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('aiCopilot')">&times;</span>
+            <h3>Intra-operative AI Copilot</h3>
+            <div class="modal-section">
+                <h4>Multimodal Large Language Model Assistant</h4>
+                <p>Our AI Copilot represents the next generation of surgical decision support, combining advanced language models with real-time analysis of operative video, TEE imaging, vital signs, and robot kinematics. The system provides contextual guidance while maintaining complete surgeon autonomy and control.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Intelligent Assistance Features</h4>
+                <ul>
+                    <li>Real-time procedural awareness identifying current surgical phase and next steps</li>
+                    <li>Contextual instrument and anatomy identification with relevant clinical information</li>
+                    <li>Evidence-based recommendations with clear source citations from guidelines and literature</li>
+                    <li>Safety checklist integration with gentle reminders at critical decision points</li>
+                    <li>Natural language query support for instant access to guidelines and best practices</li>
+                    <li>Surgeon-controlled confirmation workflow ensuring human oversight of all suggestions</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Safety and Compliance</h4>
+                <p>The AI Copilot operates strictly as a decision support system, never controlling instruments or making autonomous decisions. Every recommendation is traceable to its source material, whether from clinical guidelines, device IFUs, or peer-reviewed literature. The system maintains a complete audit trail of all interactions for quality assurance and continuous improvement.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="digitalTwinModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('digitalTwin')">&times;</span>
+            <h3>Digital Twin for Cardiac Surgery</h3>
+            <div class="modal-section">
+                <h4>Patient-Specific Virtual Heart Modeling</h4>
+                <p>Our Digital Twin technology creates precise, patient-specific virtual models of heart valves from routine imaging data. These interactive 3D models enable surgeons to explore repair options, predict outcomes, and optimize surgical strategies before entering the operating room.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Advanced Simulation Capabilities</h4>
+                <ul>
+                    <li>Automatic 3D reconstruction from standard TEE or CT imaging data</li>
+                    <li>Interactive "what-if" scenarios for different repair strategies and techniques</li>
+                    <li>Ring size optimization with predicted coaptation and hemodynamic outcomes</li>
+                    <li>Chord length and positioning analysis for optimal repair geometry</li>
+                    <li>Leaflet resection planning with visualization of resulting valve configuration</li>
+                    <li>Pressure gradient and flow pattern predictions based on computational fluid dynamics</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Clinical Decision Support</h4>
+                <p>The Digital Twin provides quantitative metrics for surgical planning including expected coaptation surface area, predicted regurgitation risk, and estimated pressure gradients. Surgeons can compare multiple repair strategies side-by-side, share plans with colleagues for consultation, and use the models for patient education and informed consent discussions.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="simulatorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('simulator')">&times;</span>
+            <h3>Low-Cost Mitral Valve Simulator</h3>
+            <div class="modal-section">
+                <h4>Revolutionary Training Platform</h4>
+                <p>Our portable mitral valve simulator combines physical realism with digital intelligence to create an unparalleled training experience. Using interchangeable 3D-printed silicone valves and integrated sensing, trainees can practice complex repair techniques while receiving real-time performance feedback.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Training Capabilities</h4>
+                <ul>
+                    <li>Realistic tissue handling with 3D-printed TissueMatrix™ silicone valves</li>
+                    <li>Practice of complete repair procedures including exposure and visualization techniques</li>
+                    <li>Triangular and quadrangular resection with immediate visual feedback</li>
+                    <li>Neochord placement and tensioning with force feedback</li>
+                    <li>Annuloplasty ring sizing and implantation procedures</li>
+                    <li>Advanced knot-tying practice with tension monitoring</li>
+                    <li>Compatible with both standard instruments and da Vinci Research Kit</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Performance Analytics</h4>
+                <p>The simulator provides comprehensive performance metrics including task completion time, error tracking, checklist compliance, and repair quality indicators. Overhead cameras enable video debriefing, while integrated sensors measure leak rates and pressure gradients. This objective feedback accelerates skill development and ensures competency before operating on patients.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="roboticsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('robotics')">&times;</span>
+            <h3>AI-Enhanced Robotics for Cardiac Surgery</h3>
+            <div class="modal-section">
+                <h4>Intelligent Robotic Assistance Layer</h4>
+                <p>Our AI enhancement layer adds intelligent capabilities to existing robotic platforms like the Intuitive da Vinci system. By analyzing real-time video, kinematics, and surgical context, the system provides assistance that reduces cognitive load while maintaining complete surgeon control.</p>
+            </div>
+            <div class="modal-section">
+                <h4>Smart Assistance Features</h4>
+                <ul>
+                    <li>Camera autopilot automatically centering the surgical field and maintaining optimal views</li>
+                    <li>Horizon leveling and field-of-view optimization reducing the need for manual adjustments</li>
+                    <li>Proximity warnings for critical structures like chordae and papillary muscles</li>
+                    <li>Soft "no-go" zones preventing inadvertent contact with sensitive anatomy</li>
+                    <li>Suture planning assistance suggesting optimal bite locations and spacing</li>
+                    <li>Ring sizing recommendations based on valve geometry analysis</li>
+                    <li>Tremor filtration and motion scaling for enhanced precision</li>
+                </ul>
+            </div>
+            <div class="modal-section">
+                <h4>Platform Integration</h4>
+                <p>Our system integrates seamlessly with existing robotic platforms through ROS 2 compatibility, supporting both research systems like the dVRK and clinical platforms like the da Vinci Xi/X. The assistance features can be customized to surgeon preferences and gradually introduced as comfort levels increase, ensuring smooth adoption and maximum benefit.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Page loader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1500);
-        });
-
-        // Navigation functionality
-        function showSection(sectionId) {
-            // Update active nav item
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show selected section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        // Advanced Mitral Valve Digital Twin Visualization
-        let scene, camera, renderer;
-        let mitralValve, bloodFlow, annulusRing;
-        let isAnimating = false;
-        let bloodParticles = [];
-        let currentVisualizationMode = 'anatomy';
-        let heartbeatAnimation = null;
-
-        function initAdvancedMitralDemo() {
-            const canvas = document.getElementById('advancedMitralCanvas');
-            if (!canvas) return;
-
-            // Scene setup
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x0a0e1a);
-            scene.fog = new THREE.Fog(0x0a0e1a, 20, 100);
-
-            // Camera setup
-            camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-            camera.position.set(0, 10, 25);
-            camera.lookAt(0, 0, 0);
-
-            // Renderer setup
-            renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = 1.2;
-
-            // Advanced lighting setup
-            const ambientLight = new THREE.AmbientLight(0x404040, 0.8);
-            scene.add(ambientLight);
-
-            const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
-            mainLight.position.set(10, 20, 10);
-            mainLight.castShadow = true;
-            mainLight.shadow.camera.near = 0.1;
-            mainLight.shadow.camera.far = 50;
-            mainLight.shadow.camera.left = -20;
-            mainLight.shadow.camera.right = 20;
-            mainLight.shadow.camera.top = 20;
-            mainLight.shadow.camera.bottom = -20;
-            mainLight.shadow.mapSize.width = 2048;
-            mainLight.shadow.mapSize.height = 2048;
-            scene.add(mainLight);
-
-            // Rim lights for better definition
-            const rimLight1 = new THREE.PointLight(0xDC143C, 0.8, 30);
-            rimLight1.position.set(-10, 5, 5);
-            scene.add(rimLight1);
-
-            const rimLight2 = new THREE.PointLight(0x00CED1, 0.8, 30);
-            rimLight2.position.set(10, 5, -5);
-            scene.add(rimLight2);
-
-            // Back light
-            const backLight = new THREE.PointLight(0x4ECDC4, 0.5, 40);
-            backLight.position.set(0, -10, -15);
-            scene.add(backLight);
-
-            // Create advanced mitral valve anatomy
-            createAdvancedMitralValve();
-            
-            // Create blood flow visualization
-            createAdvancedBloodFlow();
-
-            // Mouse controls
-            let mouseX = 0, mouseY = 0;
-            let targetX = 0, targetY = 0;
-            
-            canvas.addEventListener('mousemove', (event) => {
-                const rect = canvas.getBoundingClientRect();
-                mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-                mouseY = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-            });
-
-            // Animation loop
-            function animate() {
-                requestAnimationFrame(animate);
-
-                // Smooth camera movement
-                targetX = mouseX * 15;
-                targetY = mouseY * 5;
-                
-                camera.position.x += (Math.sin(targetX * Math.PI * 0.1) * 25 - camera.position.x) * 0.05;
-                camera.position.y += (10 + targetY - camera.position.y) * 0.05;
-                camera.position.z = 25 + Math.cos(targetX * Math.PI * 0.1) * 10;
-                camera.lookAt(0, 0, 0);
-
-                // Animate mitral valve components
-                if (mitralValve && isAnimating) {
-                    const time = Date.now() * 0.001;
-                    
-                    // Heartbeat animation
-                    const heartbeatScale = 1 + Math.sin(time * 2) * 0.03;
-                    mitralValve.scale.set(heartbeatScale, heartbeatScale, heartbeatScale);
-                    
-                    // Leaflet movement
-                    mitralValve.children.forEach((child, index) => {
-                        if (child.name && child.name.includes('leaflet')) {
-                            const phase = Math.sin(time * 2 + index * 0.5);
-                            child.rotation.x = child.userData.baseRotationX + phase * 0.15;
-                            child.position.y = child.userData.basePositionY + phase * 0.3;
-                        }
-                        
-                        // Chordae movement
-                        if (child.name && child.name.includes('chord')) {
-                            const stretch = 1 + Math.sin(time * 2.5 + index * 0.3) * 0.1;
-                            child.scale.y = stretch;
-                        }
-                    });
-                }
-
-                // Animate blood particles
-                if (bloodParticles.length > 0) {
-                    bloodParticles.forEach((particle, index) => {
-                        if (particle.visible) {
-                            particle.position.y -= 0.15;
-                            particle.position.x += Math.sin(Date.now() * 0.001 + index) * 0.02;
-                            particle.position.z += Math.cos(Date.now() * 0.001 + index) * 0.02;
-                            
-                            // Reset particles that go too low
-                            if (particle.position.y < -15) {
-                                particle.position.y = 15;
-                                particle.position.x = (Math.random() - 0.5) * 6;
-                                particle.position.z = (Math.random() - 0.5) * 6;
-                            }
-                            
-                            // Pulse effect
-                            const pulse = 1 + Math.sin(Date.now() * 0.005 + index) * 0.2;
-                            particle.scale.set(pulse, pulse, pulse);
-                        }
-                    });
-                }
-
-                // Rotate annulus ring if present
-                if (annulusRing) {
-                    annulusRing.rotation.z += 0.002;
-                }
-
-                renderer.render(scene, camera);
-            }
-
-            animate();
-
-            // Handle resize
-            window.addEventListener('resize', () => {
-                camera.aspect = canvas.clientWidth / canvas.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-            });
-        }
-
-        function createAdvancedMitralValve() {
-            mitralValve = new THREE.Group();
-
-            // Create annulus with more detail
-            const annulusGeometry = new THREE.TorusGeometry(4, 0.4, 16, 100);
-            const annulusMaterial = new THREE.MeshPhongMaterial({
-                color: 0xFF6B6B,
-                emissive: 0x441111,
-                emissiveIntensity: 0.2,
-                shininess: 150,
-                specular: 0xFFFFFF,
-                opacity: 0.95,
-                transparent: true
-            });
-            const annulus = new THREE.Mesh(annulusGeometry, annulusMaterial);
-            annulus.castShadow = true;
-            annulus.receiveShadow = true;
-            annulus.name = 'annulus';
-            mitralValve.add(annulus);
-
-            // Create anterior leaflet with realistic shape
-            const anteriorShape = new THREE.Shape();
-            anteriorShape.moveTo(0, 0);
-            anteriorShape.bezierCurveTo(3, 0, 4, -2, 4, -4);
-            anteriorShape.bezierCurveTo(4, -6, 2, -7, 0, -7);
-            anteriorShape.bezierCurveTo(-2, -7, -4, -6, -4, -4);
-            anteriorShape.bezierCurveTo(-4, -2, -3, 0, 0, 0);
-
-            const anteriorExtrudeSettings = {
-                depth: 0.3,
-                bevelEnabled: true,
-                bevelSegments: 3,
-                steps: 2,
-                bevelSize: 0.1,
-                bevelThickness: 0.1
-            };
-
-            const anteriorGeometry = new THREE.ExtrudeGeometry(anteriorShape, anteriorExtrudeSettings);
-            const anteriorMaterial = new THREE.MeshPhongMaterial({
-                color: 0xFFAAAA,
-                emissive: 0x550000,
-                emissiveIntensity: 0.1,
-                side: THREE.DoubleSide,
-                opacity: 0.9,
-                transparent: true,
-                shininess: 100
-            });
-            
-            const anteriorLeaflet = new THREE.Mesh(anteriorGeometry, anteriorMaterial);
-            anteriorLeaflet.position.set(0, 0, 2);
-            anteriorLeaflet.rotation.x = Math.PI / 6;
-            anteriorLeaflet.castShadow = true;
-            anteriorLeaflet.receiveShadow = true;
-            anteriorLeaflet.name = 'anterior-leaflet';
-            anteriorLeaflet.userData = {
-                baseRotationX: Math.PI / 6,
-                basePositionY: 0
-            };
-            mitralValve.add(anteriorLeaflet);
-
-            // Create posterior leaflet with three scallops
-            for (let i = 0; i < 3; i++) {
-                const scallopGeometry = new THREE.SphereGeometry(2, 32, 16, 0, Math.PI * 0.6);
-                const scallopMaterial = new THREE.MeshPhongMaterial({
-                    color: 0xFFBBBB,
-                    emissive: 0x550000,
-                    emissiveIntensity: 0.1,
-                    side: THREE.DoubleSide,
-                    opacity: 0.9,
-                    transparent: true,
-                    shininess: 100
-                });
-                
-                const scallop = new THREE.Mesh(scallopGeometry, scallopMaterial);
-                const angle = (i - 1) * Math.PI / 6;
-                scallop.position.set(Math.sin(angle) * 2, 0, -2 + Math.cos(angle));
-                scallop.rotation.x = -Math.PI / 6;
-                scallop.scale.set(0.8, 0.5, 0.8);
-                scallop.castShadow = true;
-                scallop.receiveShadow = true;
-                scallop.name = `posterior-leaflet-${i}`;
-                scallop.userData = {
-                    baseRotationX: -Math.PI / 6,
-                    basePositionY: 0
-                };
-                mitralValve.add(scallop);
-            }
-
-            // Create detailed chordae tendineae
-            const chordMaterial = new THREE.MeshPhongMaterial({
-                color: 0xFFCCCC,
-                emissive: 0x330000,
-                opacity: 0.8,
-                transparent: true,
-                shininess: 50
-            });
-
-            for (let i = 0; i < 16; i++) {
-                const chordGeometry = new THREE.CylinderGeometry(0.08, 0.12, 6, 8);
-                const chord = new THREE.Mesh(chordGeometry, chordMaterial);
-                const angle = (i / 16) * Math.PI * 2;
-                const radius = 2.5 + Math.random() * 0.5;
-                chord.position.set(
-                    Math.cos(angle) * radius,
-                    -3,
-                    Math.sin(angle) * radius
-                );
-                chord.rotation.z = (Math.random() - 0.5) * 0.3;
-                chord.rotation.x = (Math.random() - 0.5) * 0.3;
-                chord.castShadow = true;
-                chord.name = `chord-${i}`;
-                mitralValve.add(chord);
-            }
-
-            // Create papillary muscles with more detail
-            const papillaryGeometry = new THREE.ConeGeometry(0.8, 3, 12);
-            const papillaryMaterial = new THREE.MeshPhongMaterial({
-                color: 0xFF8888,
-                emissive: 0x220000,
-                shininess: 80
-            });
-
-            const papillary1 = new THREE.Mesh(papillaryGeometry, papillaryMaterial);
-            papillary1.position.set(-3, -6, 0);
-            papillary1.castShadow = true;
-            papillary1.receiveShadow = true;
-            papillary1.name = 'papillary-anterior';
-            mitralValve.add(papillary1);
-
-            const papillary2 = new THREE.Mesh(papillaryGeometry, papillaryMaterial);
-            papillary2.position.set(3, -6, 0);
-            papillary2.castShadow = true;
-            papillary2.receiveShadow = true;
-            papillary2.name = 'papillary-posterior';
-            mitralValve.add(papillary2);
-
-            // Add left atrium walls (simplified)
-            const atriumGeometry = new THREE.SphereGeometry(8, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.5);
-            const atriumMaterial = new THREE.MeshPhongMaterial({
-                color: 0x884444,
-                emissive: 0x110000,
-                side: THREE.BackSide,
-                opacity: 0.3,
-                transparent: true
-            });
-            const atrium = new THREE.Mesh(atriumGeometry, atriumMaterial);
-            atrium.position.y = 4;
-            atrium.scale.set(1, 0.8, 1);
-            mitralValve.add(atrium);
-
-            scene.add(mitralValve);
-        }
-
-        function createAdvancedBloodFlow() {
-            const particleCount = 200;
-            const particleGeometry = new THREE.SphereGeometry(0.15, 6, 6);
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particleMaterial = new THREE.MeshPhongMaterial({
-                    color: new THREE.Color().setHSL(0, 0.8, 0.4 + Math.random() * 0.2),
-                    emissive: 0x440000,
-                    emissiveIntensity: 0.5,
-                    opacity: 0.8,
-                    transparent: true
-                });
-                
-                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
-                particle.position.set(
-                    (Math.random() - 0.5) * 8,
-                    Math.random() * 30 - 10,
-                    (Math.random() - 0.5) * 8
-                );
-                particle.visible = false;
-                bloodParticles.push(particle);
-                scene.add(particle);
-            }
-        }
-
-        // Control functions for the advanced demo
-        function startHeartbeat() {
-            isAnimating = !isAnimating;
-            document.getElementById('heartRateValue').textContent = isAnimating ? '120 bpm' : '72 bpm';
-            updateMetrics();
-        }
-
-        function toggleBloodFlow() {
-            bloodParticles.forEach(particle => {
-                particle.visible = !particle.visible;
-            });
-            document.getElementById('flowRateValue').textContent = 
-                bloodParticles[0].visible ? '6.8 L/min' : '5.2 L/min';
-        }
-
-        function simulateExercise() {
-            isAnimating = true;
-            document.getElementById('heartRateValue').textContent = '145 bpm';
-            document.getElementById('pressureValue').textContent = '160/95 mmHg';
-            document.getElementById('flowRateValue').textContent = '8.5 L/min';
-            bloodParticles.forEach(particle => particle.visible = true);
-            updateAllMetrics('exercise');
-        }
-
-        function simulateRest() {
-            isAnimating = false;
-            document.getElementById('heartRateValue').textContent = '60 bpm';
-            document.getElementById('pressureValue').textContent = '110/70 mmHg';
-            document.getElementById('flowRateValue').textContent = '4.5 L/min';
-            bloodParticles.forEach(particle => particle.visible = false);
-            updateAllMetrics('rest');
-        }
-
-        function simulateMildMR() {
-            document.getElementById('regurgValue').textContent = 'Mild (1+)';
-            document.getElementById('regurgVolume').textContent = '15 mL';
-            document.getElementById('meanGradient').textContent = '2.8 mmHg';
-            updateVisualization('mild-mr');
-        }
-
-        function simulateModerateMR() {
-            document.getElementById('regurgValue').textContent = 'Moderate (2+)';
-            document.getElementById('regurgVolume').textContent = '35 mL';
-            document.getElementById('meanGradient').textContent = '5.2 mmHg';
-            updateVisualization('moderate-mr');
-        }
-
-        function simulateSevereMR() {
-            document.getElementById('regurgValue').textContent = 'Severe (3+)';
-            document.getElementById('regurgVolume').textContent = '65 mL';
-            document.getElementById('meanGradient').textContent = '8.5 mmHg';
-            document.getElementById('ejectionFraction').textContent = '45%';
-            updateVisualization('severe-mr');
-        }
-
-        function simulateProlapse() {
-            if (mitralValve) {
-                const anteriorLeaflet = mitralValve.getObjectByName('anterior-leaflet');
-                if (anteriorLeaflet) {
-                    anteriorLeaflet.position.y = 2;
-                    anteriorLeaflet.rotation.x = Math.PI / 3;
-                }
-            }
-            document.getElementById('coaptationLength').textContent = '3.2 mm';
-            updateVisualization('prolapse');
-        }
-
-        function simulateAnnuloplasty() {
-            if (!annulusRing) {
-                const ringGeometry = new THREE.TorusGeometry(3.5, 0.2, 8, 50);
-                const ringMaterial = new THREE.MeshPhongMaterial({
-                    color: 0x4444FF,
-                    emissive: 0x000044,
-                    metalness: 0.8,
-                    roughness: 0.2
-                });
-                annulusRing = new THREE.Mesh(ringGeometry, ringMaterial);
-                annulusRing.position.y = 0.5;
-                scene.add(annulusRing);
-            }
-            document.getElementById('effectiveArea').textContent = '3.8 cm²';
-            document.getElementById('regurgVolume').textContent = '< 5 mL';
-            updateVisualization('annuloplasty');
-        }
-
-        function simulateMitraClip() {
-            const clipGeometry = new THREE.BoxGeometry(0.5, 1.5, 0.3);
-            const clipMaterial = new THREE.MeshPhongMaterial({
-                color: 0x888888,
-                metalness: 0.9,
-                roughness: 0.1
-            });
-            const clip = new THREE.Mesh(clipGeometry, clipMaterial);
-            clip.position.set(0, 0, 0);
-            if (mitralValve) mitralValve.add(clip);
-            document.getElementById('regurgVolume').textContent = '10 mL';
-            document.getElementById('meanGradient').textContent = '4.5 mmHg';
-            updateVisualization('mitraclip');
-        }
-
-        function simulateChordRepair() {
-            if (mitralValve) {
-                mitralValve.children.forEach(child => {
-                    if (child.name && child.name.includes('chord')) {
-                        child.material.color.setHex(0x4444FF);
-                        child.scale.y = 0.9;
-                    }
-                });
-            }
-            document.getElementById('coaptationLength').textContent = '9.5 mm';
-            updateVisualization('chord-repair');
-        }
-
-        function simulateValveReplacement() {
-            if (mitralValve) {
-                // Hide native valve
-                mitralValve.children.forEach(child => {
-                    if (child.name && child.name.includes('leaflet')) {
-                        child.visible = false;
-                    }
-                });
-                
-                // Add prosthetic valve
-                const prostheticGeometry = new THREE.CylinderGeometry(3.5, 3.5, 1, 32);
-                const prostheticMaterial = new THREE.MeshPhongMaterial({
-                    color: 0x666666,
-                    metalness: 0.95,
-                    roughness: 0.05
-                });
-                const prosthetic = new THREE.Mesh(prostheticGeometry, prostheticMaterial);
-                prosthetic.position.y = 0;
-                mitralValve.add(prosthetic);
-            }
-            document.getElementById('effectiveArea').textContent = '3.2 cm²';
-            document.getElementById('regurgVolume').textContent = '0 mL';
-            document.getElementById('meanGradient').textContent = '5.8 mmHg';
-            updateVisualization('valve-replacement');
-        }
-
-        function showAnatomyMode() {
-            currentVisualizationMode = 'anatomy';
-            updateVisualizationMode();
-        }
-
-        function showFlowMode() {
-            currentVisualizationMode = 'flow';
-            bloodParticles.forEach(particle => particle.visible = true);
-            updateVisualizationMode();
-        }
-
-        function showStressMode() {
-            currentVisualizationMode = 'stress';
-            if (mitralValve) {
-                mitralValve.children.forEach(child => {
-                    if (child.material) {
-                        child.material.color.setHSL(0.1, 0.8, 0.5);
-                    }
-                });
-            }
-            updateVisualizationMode();
-        }
-
-        function showPredictiveMode() {
-            currentVisualizationMode = 'predictive';
-            document.getElementById('aiConfidence').textContent = '99.2%';
-            updateVisualizationMode();
-        }
-
-        function updateHeartRate(value) {
-            document.getElementById('heartRateValue').textContent = value + ' bpm';
-            updateMetrics();
-        }
-
-        function updateSystolic(value) {
-            document.getElementById('systolicValue').textContent = value + ' mmHg';
-            document.getElementById('pressureValue').textContent = value + '/80 mmHg';
-            updateMetrics();
-        }
-
-        function updateCardiacOutput(value) {
-            document.getElementById('outputValue').textContent = value + ' L/min';
-            document.getElementById('flowRateValue').textContent = value + ' L/min';
-            updateMetrics();
-        }
-
-        function updateMetrics() {
-            // Update metric displays based on current parameters
-            const heartRate = parseInt(document.getElementById('heartRateValue').textContent);
-            const systolic = parseInt(document.getElementById('systolicValue').textContent);
-            
-            // Calculate derived metrics
-            const ejectionFraction = Math.min(75, Math.max(35, 65 + (120 - systolic) * 0.2));
-            document.getElementById('ejectionFraction').textContent = Math.round(ejectionFraction) + '%';
-        }
-
-        function updateAllMetrics(condition) {
-            switch(condition) {
-                case 'exercise':
-                    document.getElementById('ejectionFraction').textContent = '72%';
-                    document.getElementById('regurgVolume').textContent = '8 mL';
-                    document.getElementById('meanGradient').textContent = '4.5 mmHg';
-                    document.getElementById('coaptationLength').textContent = '7.8 mm';
-                    document.getElementById('effectiveArea').textContent = '4.5 cm²';
-                    document.getElementById('aiConfidence').textContent = '97.8%';
-                    break;
-                case 'rest':
-                    document.getElementById('ejectionFraction').textContent = '65%';
-                    document.getElementById('regurgVolume').textContent = '5 mL';
-                    document.getElementById('meanGradient').textContent = '3.2 mmHg';
-                    document.getElementById('coaptationLength').textContent = '8.5 mm';
-                    document.getElementById('effectiveArea').textContent = '4.2 cm²';
-                    document.getElementById('aiConfidence').textContent = '98.5%';
-                    break;
-            }
-            updateCharts();
-        }
-
-        function updateVisualization(type) {
-            // Update 3D visualization based on condition/intervention
-            if (mitralValve) {
-                switch(type) {
-                    case 'mild-mr':
-                    case 'moderate-mr':
-                    case 'severe-mr':
-                        const severity = type.split('-')[0];
-                        const regurgFlow = severity === 'mild' ? 10 : severity === 'moderate' ? 30 : 60;
-                        // Show regurgitant jets
-                        for (let i = 0; i < regurgFlow; i++) {
-                            if (bloodParticles[i]) {
-                                bloodParticles[i].visible = true;
-                                bloodParticles[i].material.color.setHex(0xFF0000);
-                            }
-                        }
-                        break;
-                }
-            }
-            updateCharts();
-        }
-
-        function updateVisualizationMode() {
-            // Update display based on visualization mode
-            console.log('Visualization mode:', currentVisualizationMode);
-        }
-
-        function updateCharts() {
-            // Update mini charts in metrics dashboard
-            // This would typically use Chart.js to render actual charts
-        }
-
-        // Initialize Three.js demo when page loads
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                initAdvancedMitralDemo();
-                initMetricCharts();
-            }, 100);
-        });
-
-        // Initialize metric charts
-        function initMetricCharts() {
-            // Initialize Chart.js charts for each metric
-            const chartConfigs = [
-                { id: 'efChart', label: 'EF %', color: 'rgba(220, 20, 60, 0.8)' },
-                { id: 'rvChart', label: 'RV mL', color: 'rgba(0, 206, 209, 0.8)' },
-                { id: 'mgChart', label: 'Gradient', color: 'rgba(78, 205, 196, 0.8)' },
-                { id: 'clChart', label: 'Coaptation', color: 'rgba(255, 107, 107, 0.8)' },
-                { id: 'eoaChart', label: 'EOA', color: 'rgba(30, 58, 95, 0.8)' },
-                { id: 'acChart', label: 'AI Score', color: 'rgba(102, 126, 234, 0.8)' }
-            ];
-
-            chartConfigs.forEach(config => {
-                const canvas = document.getElementById(config.id);
-                if (canvas && typeof Chart !== 'undefined') {
-                    const ctx = canvas.getContext('2d');
-                    new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: ['', '', '', '', '', ''],
-                            datasets: [{
-                                data: Array(6).fill(null).map(() => Math.random() * 100),
-                                borderColor: config.color,
-                                backgroundColor: config.color.replace('0.8', '0.2'),
-                                borderWidth: 2,
-                                tension: 0.4,
-                                fill: true,
-                                pointRadius: 0
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: { enabled: false }
-                            },
-                            scales: {
-                                x: { display: false },
-                                y: { display: false }
-                            }
-                        }
-                    });
-                }
-            });
-        }
-
-        // Smooth scroll and animations
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });
 
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 1)';
+                navbar.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Show success message
+            alert(`Thank you for your interest in CardioVis! We have received your inquiry and will contact you at ${data.email} within 24 hours to discuss how our ${data.interest} solution can transform your practice.`);
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Modal functions
+        function openModal(product) {
+            const modal = document.getElementById(product + 'Modal');
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(product) {
+            const modal = document.getElementById(product + 'Modal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let modal of modals) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        }
+
         // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
                 }
             });
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.feature-card, .tech-showcase-card, .timeline-content, .team-member, .publication-card, .partner-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        document.querySelectorAll('.product-card, .stat-card, .research-card, .pub-item').forEach(el => {
             observer.observe(el);
         });
 
-        // Dynamic counter animations
-        function animateCounter(element, target, duration = 2000) {
-            const start = 0;
-            const increment = target / (duration / 16);
-            let current = start;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target + (element.textContent.includes('%') ? '%' : '');
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current) + (element.textContent.includes('%') ? '%' : '');
+        // Add number counting animation for stats
+        function animateNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = stat.textContent;
+                if (target.includes('%')) {
+                    const num = parseFloat(target);
+                    let current = 0;
+                    const increment = num / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= num) {
+                            current = num;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = current.toFixed(1) + '%';
+                    }, 30);
+                } else if (target.includes('+')) {
+                    const num = parseInt(target);
+                    let current = 0;
+                    const increment = num / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= num) {
+                            current = num;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = Math.floor(current) + '+';
+                    }, 30);
+                } else if (target.includes('x')) {
+                    const num = parseInt(target);
+                    let current = 0;
+                    const increment = num / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= num) {
+                            current = num;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = Math.floor(current) + 'x';
+                    }, 30);
                 }
-            }, 16);
+            });
         }
 
-        // Animate impact numbers when they come into view
-        const impactObserver = new IntersectionObserver((entries) => {
+        // Trigger number animation when stats section is visible
+        const statsSection = document.querySelector('.stats-grid');
+        const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
-                    entry.target.setAttribute('data-animated', 'true');
-                    const numberElement = entry.target.querySelector('.impact-number');
-                    if (numberElement) {
-                        const text = numberElement.textContent;
-                        if (text.includes('%')) {
-                            const num = parseInt(text);
-                            animateCounter(numberElement, num);
-                        } else if (text.includes('+')) {
-                            const num = parseInt(text);
-                            numberElement.textContent = '0+';
-                            animateCounter(numberElement, num);
-                        }
-                    }
+                if (entry.isIntersecting) {
+                    animateNumbers();
+                    statsObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.5 });
 
-        document.querySelectorAll('.impact-item').forEach(item => {
-            impactObserver.observe(item);
-        });
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
 
-        // Form submission handler
-        document.querySelector('.form-submit')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Thank you for your interest in CardioVis! We will contact you shortly.');
-        });
-
-        // Publication filter functionality
-        document.querySelectorAll('.filter-button').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
-                button.classList.add('active');
-                // Filter publications logic would go here
+        // Add hover effects to research cards
+        document.querySelectorAll('.research-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('h4').textContent;
+                const content = this.querySelector('p').textContent;
+                alert(`Research Area: ${title}\n\n${content}\n\nContact us to learn more about our research initiatives and collaboration opportunities.`);
             });
         });
 
-        // Advanced hover effects for tech cards
-        document.querySelectorAll('.tech-showcase-card, .feature-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                card.style.setProperty('--mouse-x', `${x}%`);
-                card.style.setProperty('--mouse-y', `${y}%`);
+        // Add hover effects to partner logos
+        document.querySelectorAll('.partner-logo').forEach(logo => {
+            logo.addEventListener('click', function() {
+                const partner = this.querySelector('h5').textContent;
+                alert(`${partner} is a valued partner in our mission to transform cardiac surgery through AI and robotics. Together, we're advancing the future of surgical care.`);
             });
         });
+
+        // Initialize page animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loaded class for initial animations
+            document.body.classList.add('loaded');
+            
+            // Preload animations
+            const heroElements = document.querySelectorAll('.hero-text h1, .hero-text .subtitle, .hero-text p, .hero-buttons');
+            heroElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
